@@ -6,11 +6,6 @@ import About from './Components/About';
 function App() {
   return (
     <Router>
-      {/* Menú de navegación */}
-      <nav>
-        <Link to="/home">Inicio</Link> | <Link to="/about">Sobre</Link>
-      </nav>
-
       {/* Rutas */}
       <Routes>
         <Route path="/" element={<Navigate to="/home" replace />} />
