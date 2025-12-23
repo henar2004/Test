@@ -10,7 +10,6 @@ import { useEffect } from "react";
 // Componentes internos
 import Portafolio from "./pages/portafolio.js";
 import Footer from "./components/footer.js";
-import NotFound from "./pages/notFound.js";
 
 export default function App() {
   // Cambio de color de favicon
@@ -39,7 +38,6 @@ export default function App() {
         <Route path="/" element={<Navigate to="/Home" replace />} />
         <Route path="/Home" element={<Portafolio />} />
         {/* Ruta catch-all para errores */}
-        <Route path="*" element={<NotFound />} />
       </Routes>
 
       {/* Footer siempre visible */}
