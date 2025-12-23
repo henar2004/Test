@@ -1,58 +1,55 @@
+import webIcon from "../images/Link.png";
+import '../styles/cards.css';
+
+const proyectos = [
+  {
+    titulo: "Proyecto Roblox 1",
+    descripcion:
+      "Juego desarrollado en Roblox con scripting en Lua, centrado en mecánicas SCP.",
+    enlace: "#",
+  },
+  {
+    titulo: "Proyecto Web 1",
+    descripcion:
+      "Página web con Bootstrap y JavaScript, enfocada en e-commerce.",
+    enlace: "#",
+  },
+  {
+    titulo: "Proyecto Publicidad",
+    descripcion: "Diseño de contenido publicitario para redes sociales.",
+    enlace: "#",
+  },
+];
+
 export default function Cards() {
-  // Array de proyectos dentro del mismo archivo
-  const projects = [
-    {
-      title: "Proyecto 1",
-      description: "Mini descripción del proyecto 1.",
-      image: "https://via.placeholder.com/300x200",
-      link: "#"
-    },
-    {
-      title: "Proyecto 2",
-      description: "Mini descripción del proyecto 2.",
-      image: "https://via.placeholder.com/300x200",
-      link: "#"
-    },
-    {
-      title: "Proyecto 3",
-      description: "Mini descripción del proyecto 3.",
-      image: "https://via.placeholder.com/300x200",
-      link: "#"
-    },
-      {
-      title: "Proyecto 4",
-      description: "Mini descripción del proyecto 3.",
-      image: "https://via.placeholder.com/300x200",
-      link: "#"
-    },
-    // Puedes añadir más proyectos aquí
-  ];
-
-  // Componente interno que genera la tarjeta
-  const ProjectCard = ({ title, description, image, link }) => (
-    <div className="col-md-4">
-      <div className="card h-100">
-        <img src={image} className="card-img-top" alt={title} />
-        <div className="card-body">
-          <h5 className="card-title">{title}</h5>
-          <p className="card-text">{description}</p>
-          <a href={link} className="btn btn-primary btn-sm">Ver</a>
-        </div>
-      </div>
-    </div>
-  );
-
   return (
-    <div className="row g-4">
-      {projects.map((project, index) => (
-        <ProjectCard
-          key={index}
-          title={project.title}
-          description={project.description}
-          image={project.image}
-          link={project.link}
-        />
-      ))}
+    <div className="mb-4">
+      <h5 className="fw-semibold mb-3 text-white">Proyectos</h5>
+      <div className="row">
+        {proyectos.map((proyecto, index) => (
+          <div className="col-md-4 mb-4" key={index}>
+            <div className="portfolio-card p-4 rounded shadow-sm h-100 d-flex flex-column justify-content-between position-relative">
+              <div>
+                <h6 className="fw-semibold">{proyecto.titulo}</h6>
+                <p className="mb-0">{proyecto.descripcion}</p>
+              </div>
+
+              <div className="d-flex gap-3 mt-3 align-items-center">
+                <a
+                  href={proyecto.enlace}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn-project d-flex align-items-center gap-2"
+                  aria-label={`Abrir ${proyecto.titulo}`}
+                >
+                  <img src={webIcon} alt="Web" width={18} height={18} />
+                  Abrir
+                </a>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
     </div>
   );
 }

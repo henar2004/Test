@@ -1,0 +1,47 @@
+/* HERO / INICIO */
+.hero { gap: 1rem; display:flex; align-items:center; margin-bottom:2rem; }
+.hero-photo {
+  width: 120px;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 3px solid rgba(255,255,255,0.05);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.6);
+}
+.hero-content .hero-name { font-size: 1.5rem; margin:0; color:#fff; }
+.hero-role { color: var(--muted); margin:0.15rem 0 0.6rem; font-weight:500; }
+.hero-desc { color: rgba(255,255,255,0.9); margin-bottom:0.6rem; }
+
+/* SECTIONS */
+.section-title { font-size: 1.05rem; margin-bottom: .9rem; }
+
+/* HABILIDADES */
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit,minmax(240px,1fr));
+  gap: 0.9rem;
+}
+.skill { background: rgba(255,255,255,0.02); padding: .7rem; border-radius: 8px; }
+.skill-head { display:flex; justify-content:space-between; align-items:center; margin-bottom:.45rem; color: var(--muted); font-size:.95rem; }
+.skill-value { font-weight:600; color:#fff; }
+.skill-bar { height:10px; background: rgba(255,255,255,0.04); border-radius:999px; overflow:hidden; }
+.skill-fill { height:100%; background: linear-gradient(90deg,var(--accent), #00c183); border-radius:999px; transition: width .8s cubic-bezier(.2,.9,.2,1); }
+
+/* TIMELINE (experiencia) */
+.timeline { display:flex; flex-direction:column; gap:.8rem; }
+.timeline-item { display:flex; gap:.9rem; align-items:flex-start; }
+.timeline-dot { width:12px; height:12px; border-radius:50%; background: var(--accent); box-shadow: 0 0 8px rgba(0,179,126,0.18); margin-top:6px; }
+.timeline-body strong { display:block; color:#fff; }
+.timeline-sub { color: var(--muted); font-size:.92rem; }
+
+/* CONTACT */
+.contact-grid { display:grid; grid-template-columns: repeat(auto-fit,minmax(220px,1fr)); gap:.7rem; }
+.contact-item { background: rgba(255,255,255,0.02); padding:.6rem .8rem; border-radius:8px; text-decoration:none; color:#fff; display:flex; flex-direction:column; }
+.contact-title { font-weight:700; }
+.contact-sub { color: var(--muted); font-size:.9rem; margin-top:.25rem; }
+
+/* responsive HERO */
+@media (max-width:767.98px){
+  .hero { flex-direction:row; gap:.7rem; }
+  .hero-photo { width:96px; height:96px; }
+}
