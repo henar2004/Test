@@ -1,5 +1,5 @@
 import webIcon from "../images/Link.png";
-import '../styles/cards.css';
+import "../styles/cards.css";
 
 const proyectos = [
   {
@@ -23,7 +23,8 @@ const proyectos = [
 
 export default function Cards() {
   return (
-    <div className="row g-4"> {/* g-4 reemplaza mb-4 en las columnas para spacing uniforme */}
+    <div className="row g-4">
+      {/* g-4 reemplaza mb-4 en las columnas para spacing uniforme */}
       {proyectos.map((proyecto, index) => (
         <div className="col-md-4" key={index}>
           <div className="portfolio-card p-4 rounded shadow-sm h-100 d-flex flex-column justify-content-between position-relative">
