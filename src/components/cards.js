@@ -23,33 +23,30 @@ const proyectos = [
 
 export default function Cards() {
   return (
-    <div className="mb-4">
-      <h5 className="fw-semibold mb-3 text-white">Proyectos</h5>
-      <div className="row">
-        {proyectos.map((proyecto, index) => (
-          <div className="col-md-4 mb-4" key={index}>
-            <div className="portfolio-card p-4 rounded shadow-sm h-100 d-flex flex-column justify-content-between position-relative">
-              <div>
-                <h6 className="fw-semibold">{proyecto.titulo}</h6>
-                <p className="mb-0">{proyecto.descripcion}</p>
-              </div>
+    <div className="row g-4"> {/* g-4 reemplaza mb-4 en las columnas para spacing uniforme */}
+      {proyectos.map((proyecto, index) => (
+        <div className="col-md-4" key={index}>
+          <div className="portfolio-card p-4 rounded shadow-sm h-100 d-flex flex-column justify-content-between position-relative">
+            <div>
+              <h6 className="fw-semibold">{proyecto.titulo}</h6>
+              <p className="mb-0">{proyecto.descripcion}</p>
+            </div>
 
-              <div className="d-flex gap-3 mt-3 align-items-center">
-                <a
-                  href={proyecto.enlace}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="btn-project d-flex align-items-center gap-2"
-                  aria-label={`Abrir ${proyecto.titulo}`}
-                >
-                  <img src={webIcon} alt="Web" width={18} height={18} />
-                  Abrir
-                </a>
-              </div>
+            <div className="d-flex gap-3 mt-3 align-items-center">
+              <a
+                href={proyecto.enlace}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn-project d-flex align-items-center gap-2"
+                aria-label={`Abrir ${proyecto.titulo}`}
+              >
+                <img src={webIcon} alt="Web" width={18} height={18} />
+                Abrir
+              </a>
             </div>
           </div>
-        ))}
-      </div>
+        </div>
+      ))}
     </div>
   );
 }

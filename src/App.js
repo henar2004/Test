@@ -20,9 +20,7 @@ export default function App() {
     link.rel = "icon";
     const setFavicon = () => {
       const isDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-      link.href = isDark
-        ? "/White_Favicon.png"
-        : "/Black_Favicon.png";
+      link.href = isDark ? "/White_Favicon.png" : "/Black_Favicon.png";
       document.head.appendChild(link);
     };
     setFavicon();
@@ -40,8 +38,8 @@ export default function App() {
         {/* Ruta catch-all para errores */}
       </Routes>
 
-      {/* Footer siempre visible */}
       {/* <Footer /> */}
+      <Footer />
     </Router>
   );
 }

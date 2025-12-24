@@ -1,12 +1,11 @@
 import Cards from "../components/cards.js";
 import miFoto from "../images/miCara.png";
-import '../styles/portafolio.css';
+import "../styles/portafolio.css";
 
 export default function Portafolio() {
   return (
     <div className="portfolio-bg min-vh-100 py-5">
-      <div className="container portfolio-container">
-
+      <div className="container">
         {/* HERO / INICIO */}
         <header id="inicio" className="hero d-flex align-items-center mb-5">
           <img src={miFoto} alt="Henar Garcia Boada" className="hero-photo" />
@@ -25,8 +24,10 @@ export default function Portafolio() {
         </header>
 
         {/* HABILIDADES / ATRIBUTOS */}
+        <h5 className="fw-semibold mb-3 text-white">
+          Habilidades & Tecnologías
+        </h5>
         <section className="portfolio-card p-4 mb-4 rounded shadow-sm">
-          <h5 className="section-title">Habilidades & Tecnologías</h5>
           <div className="skills-grid">
             {[
               { name: "Lua / Roblox Studio", value: 95 },
@@ -55,13 +56,14 @@ export default function Portafolio() {
         </section>
 
         {/* PROYECTOS */}
+        <h5 className="fw-semibold mb-3 text-white">Proyectos</h5>
         <section id="proyectos" className="mb-4">
           <Cards />
         </section>
 
         {/* EXPERIENCIA LABORAL */}
+        <h5 className="fw-semibold mb-3 text-white">Experiencia Laboral</h5>
         <section className="portfolio-card p-4 mb-4 rounded shadow-sm">
-          <h5 className="section-title">Experiencia Laboral</h5>
           <div className="timeline">
             <div className="timeline-item">
               <div className="timeline-dot" />
@@ -107,47 +109,27 @@ export default function Portafolio() {
         </section>
 
         {/* ESTUDIOS */}
-        <section className="portfolio-card p-4 mb-4 rounded shadow-sm">
-          <h5 className="section-title">Estudios</h5>
-          <ul className="list-group list-group-flush mt-2">
-            <li className="list-group-item bg-transparent text-white px-0">
-              CFGS Desarrollo de Aplicaciones Multiplataforma - Escola Ginebró
-              (Sept 2022 – Mayo 2024)
-            </li>
-            <li className="list-group-item bg-transparent text-white px-0">
-              CFGM Sistemas Microinformáticos y Redes – Escola Ginebró (Sept
-              2020 – Mayo 2022)
-            </li>
-          </ul>
-        </section>
+        <h5 className="fw-semibold mb-3 text-white">Estudios</h5>
+        <section className="row g-4 mb-4">
+          <div className="col-md-6">
+            <div className="portfolio-card p-3 rounded shadow-sm h-100 d-flex flex-column justify-content-center">
+              <div className="fw-semibold text-white mb-1">
+                CFGS — Desarrollo de Aplicaciones Multiplataforma
+              </div>
+              <div className="text-white-50 small">
+                Escola Ginebró · Sept 2022 – Mayo 2024
+              </div>
+            </div>
+          </div>
 
-        {/* CONTACTO */}
-        <section
-          id="contacto"
-          className="portfolio-card p-4 mb-4 rounded shadow-sm"
-        >
-          <h5 className="section-title">Contacto</h5>
-          <div className="contact-grid">
-            <a className="contact-item" href="tel:+34688644970">
-              <span className="contact-title">Teléfono</span>
-              <span className="contact-sub">+34 688644970</span>
-            </a>
-            <a className="contact-item" href="mailto:hegarbod@gmail.com">
-              <span className="contact-title">Email</span>
-              <span className="contact-sub">hegarbod@gmail.com</span>
-            </a>
-            <a
-              className="contact-item"
-              href="https://www.linkedin.com"
-              target="_blank"
-              rel="noreferrer"
-            >
-              <span className="contact-title">LinkedIn</span>
-              <span className="contact-sub">Perfil LinkedIn</span>
-            </a>
-            <div className="contact-item">
-              <span className="contact-title">Idiomas</span>
-              <span className="contact-sub">Inglés / Castellano / Catalán</span>
+          <div className="col-md-6">
+            <div className="portfolio-card p-3 rounded shadow-sm h-100 d-flex flex-column justify-content-center">
+              <div className="fw-semibold text-white mb-1">
+                CFGM — Sistemas Microinformáticos y Redes
+              </div>
+              <div className="text-white-50 small">
+                Escola Ginebró · Sept 2020 – Mayo 2022
+              </div>
             </div>
           </div>
         </section>

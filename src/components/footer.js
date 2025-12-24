@@ -1,21 +1,22 @@
-import '../styles/footer.css';
-
 export default function Footer() {
   return (
-    <footer className="bg-dark text-light py-4 footer-neo position-relative">
-      <div className="container text-center">
+    <footer className="portfolio-bg pb-3">
+      <div className="container py-3">
+        <div className="d-flex justify-content-between align-items-center small text-white">
+          <span>© {new Date().getFullYear()} Henar Garcia Boada</span>
 
-        <div className="d-flex justify-content-center gap-3 mb-2 flex-wrap">
-          <span className="badge bg-dark text-danger border border-danger">© 2025 Henar</span>
-          <span className="badge bg-dark text-danger border border-danger">Fullstack Dev</span>
-          <span className="badge bg-dark text-danger border border-danger">Cyberpunk Fan</span>
+          <div className="d-flex gap-3">
+            <a href="#" className="text-decoration-none text-white">
+              LinkedIn
+            </a>
+            <a
+              href="mailto:hegarbod@gmail.com"
+              className="text-decoration-none text-white"
+            >
+              Email
+            </a>
+          </div>
         </div>
-
-        <p className="neon-muted small mt-2 mb-0">
-          Powered by Bootstrap
-        </p>
-
-        <div className="footer-line mt-3"></div>
       </div>
     </footer>
   );
