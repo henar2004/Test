@@ -10,7 +10,7 @@ import { useEffect } from "react";
 // Componentes internos
 import Portafolio from "./pages/portafolio.js";
 import Footer from "./components/footer.js";
-import NotFound from "./pages/notFound.js";
+import NotFound from "./pages/not_found.js";
 
 export default function App() {
   // Cambio de color de favicon
