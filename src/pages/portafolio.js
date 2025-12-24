@@ -23,37 +23,37 @@ export default function Portafolio() {
           </div>
         </header>
 
-        {/* HABILIDADES / ATRIBUTOS */}
-        <h5 className="fw-semibold mb-3 text-white">
-          Habilidades & Tecnologías
-        </h5>
-        <section className="portfolio-card p-4 mb-4 rounded shadow-sm">
-          <div className="skills-grid">
-            {[
-              { name: "Lua / Roblox Studio", value: 95 },
-              { name: "Python", value: 85 },
-              { name: "Kotlin", value: 80 },
-              { name: "C#", value: 80 },
-              { name: "Java", value: 75 },
-              { name: "Bootstrap / CSS / JS", value: 85 },
-              { name: "Laravel / Express", value: 75 },
-              { name: "Bases de datos / APIs", value: 80 },
-            ].map((skill, i) => (
-              <div key={i} className="skill">
-                <div className="skill-head">
-                  <span>{skill.name}</span>
-                  <span className="skill-value">{skill.value}%</span>
-                </div>
-                <div className="skill-bar">
-                  <div
-                    className="skill-fill"
-                    style={{ width: `${skill.value}%` }}
-                  />
-                </div>
-              </div>
-            ))}
-          </div>
-        </section>
+       {/* HABILIDADES / ATRIBUTOS */}
+<h5 className="fw-semibold mb-3 text-white">Habilidades & Tecnologías</h5>
+<section className="portfolio-card p-4 mb-4 rounded shadow-sm">
+  <div className="row g-3">
+    {[
+      "Lua / Roblox Studio",
+      "Python",
+      "Kotlin",
+      "C#",
+      "Java",
+      "Bootstrap / CSS / JS",
+      "Laravel / Express",
+      "Bases de datos / APIs",
+    ].map((skill, i) => (
+      <div key={i} className="col-6 col-md-3 d-flex align-items-center">
+        <span
+          style={{
+            display: "inline-block",
+            width: "10px",
+            height: "10px",
+            backgroundColor: "var(--accent)",
+            borderRadius: "50%",
+            marginRight: "0.5rem",
+          }}
+        ></span>
+        <span className="text-white">{skill}</span>
+      </div>
+    ))}
+  </div>
+</section>
+
 
         {/* PROYECTOS */}
         <h5 className="fw-semibold mb-3 text-white">Proyectos</h5>
