@@ -1,5 +1,5 @@
 import Cards from "../components/cards.js";
-import miFoto from "../images/miCara.png";
+import miFoto from "../images/mi-cara.png";
 import "../styles/portafolio.css";
 
 export default function Portafolio() {

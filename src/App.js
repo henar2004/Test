@@ -10,7 +10,7 @@ import { useEffect } from "react";
 // Componentes internos
 import Portafolio from "./pages/portafolio.js";
 import Footer from "./components/footer.js";
-import NotFound from "./pages/not_found.js";
+import NotFound from "./pages/not-found.js";
 
 export default function App() {
   // Cambio de color de favicon
@@ -21,7 +21,7 @@ export default function App() {
     link.rel = "icon";
     const setFavicon = () => {
       const isDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-      link.href = isDark ? "/White_Favicon.png" : "/Black_Favicon.png";
+      link.href = isDark ? "/white-favicon.png" : "/black-favicon.png";
       document.head.appendChild(link);
     };
     setFavicon();

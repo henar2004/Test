@@ -1,4 +1,4 @@
-import webIcon from "../images/Link.png";
+import webIcon from "../images/link.png";
 import "../styles/cards.css";
 
 const proyectos = [
