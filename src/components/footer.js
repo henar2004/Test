@@ -2,7 +2,7 @@ export default function Footer() {
   return (
     <footer className="portfolio-bg pb-3">
       <div className="container py-3">
-        <div className="d-flex justify-content-between align-items-center small text-white">
+        <div className="d-flex justify-content-between align-items-center small">
           <span>© {new Date().getFullYear()} Henar Garcia Boada</span>
 
           <div className="d-flex gap-3">

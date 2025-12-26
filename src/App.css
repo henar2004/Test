@@ -15,6 +15,7 @@ body {
 /* Fondo de página (ocupa viewport visible) */
 .portfolio-bg {
   background-color: var(--bg);
+  color: #fff; /* todo texto en blanco por defecto */
 }
 
 /* Hace que la página llegue justo al final de la pantalla */
@@ -34,9 +35,6 @@ body {
 /* Cards base */
 .portfolio-card {
   background-color: var(--card);
-  color: #fff;
-  border-radius: 12px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
 }
 
 /* Botones globales */
@@ -47,18 +45,6 @@ body {
   text-decoration: none;
   font-weight: 600;
   display: inline-block;
-}
-
-.btn-cta {
-  background: linear-gradient(90deg, var(--accent), #00e6a0);
-  color: #041214;
-  border: none;
-}
-
-.btn-ghost {
-  background: transparent;
-  color: #fff;
-  border: 1px solid rgba(255, 255, 255, 0.06);
 }
 
 /* Responsive */
