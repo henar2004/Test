@@ -4,8 +4,8 @@ import "../styles/portafolio.css";
 
 export default function Portafolio() {
   return (
-    <div className="portfolio-bg min-vh-100 py-5">
-      <div className="container">
+    <main className="portfolio-bg page-fill">
+      <div className="container portfolio-container">
         {/* HERO / INICIO */}
         <header id="inicio" className="hero d-flex align-items-center mb-5">
           <img src={miFoto} alt="Henar Garcia Boada" className="hero-photo" />
@@ -135,6 +135,6 @@ export default function Portafolio() {
           </div>
         </section>
       </div>
-    </div>
+    </main>
   );
 }

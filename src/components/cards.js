@@ -1,12 +1,13 @@
+import { Link } from "react-router-dom";
 import webIcon from "../images/link.png";
 import "../styles/cards.css";
 
 const proyectos = [
   {
-    titulo: "Proyecto Roblox 1",
+    titulo: "Proyecto de tareas",
     descripcion:
       "Juego desarrollado en Roblox con scripting en Lua, centrado en mecánicas SCP.",
-    enlace: "#",
+    enlace: "/Tareas",
   },
   {
     titulo: "Proyecto Web 1",
@@ -24,7 +25,6 @@ const proyectos = [
 export default function Cards() {
   return (
     <div className="row g-4">
-      {/* g-4 reemplaza mb-4 en las columnas para spacing uniforme */}
       {proyectos.map((proyecto, index) => (
         <div className="col-md-4" key={index}>
           <div className="portfolio-card p-4 rounded shadow-sm h-100 d-flex flex-column justify-content-between position-relative">
@@ -34,16 +34,24 @@ export default function Cards() {
             </div>
 
             <div className="d-flex gap-3 mt-3 align-items-center">
-              <a
-                href={proyecto.enlace}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="btn-project d-flex align-items-center gap-2"
-                aria-label={`Abrir ${proyecto.titulo}`}
-              >
-                <img src={webIcon} alt="Web" width={18} height={18} />
-                Abrir
-              </a>
+              {proyecto.enlace !== "#" ? (
+                <Link
+                  to={proyecto.enlace}
+                  className="btn-project d-flex align-items-center gap-2"
+                  aria-label={`Abrir ${proyecto.titulo}`}
+                >
+                  <img src={webIcon} alt="Web" width={18} height={18} />
+                  Abrir
+                </Link>
+              ) : (
+                <button
+                  className="btn-project d-flex align-items-center gap-2 disabled-btn"
+                  disabled
+                >
+                  <img src={webIcon} alt="Web" width={18} height={18} />
+                  No disponible
+                </button>
+              )}
             </div>
           </div>
         </div>

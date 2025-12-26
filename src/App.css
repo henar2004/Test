@@ -5,14 +5,30 @@
   --accent: rgba(0, 179, 126, 1);
 }
 
-/* Fondo y contenedor general */
+/* ===== Fondo global ===== */
+html,
+body {
+  min-height: 100%;
+  background-color: var(--bg);
+}
+
+/* Fondo de página (ocupa viewport visible) */
 .portfolio-bg {
   background-color: var(--bg);
 }
+
+/* Hace que la página llegue justo al final de la pantalla */
+.page-fill {
+  min-height: 100vh;
+  padding-top: 3rem;
+  padding-bottom: 3rem;
+}
+
+/* Contenedor central */
 .portfolio-container {
   max-width: 920px;
   margin: 0 auto;
-  padding: 0; /* se puede ajustar según necesidad */
+  padding: 0;
 }
 
 /* Cards base */
@@ -45,9 +61,14 @@
   border: 1px solid rgba(255, 255, 255, 0.06);
 }
 
-/* Responsive base */
+/* Responsive */
 @media (max-width: 767.98px) {
   .portfolio-container {
     padding: 0 1rem;
   }
+}
+
+/* shell siempre opaco con el color de fondo */
+.fade-shell {
+  background-color: #181818; /* color que quieres ver durante la transición */
 }
