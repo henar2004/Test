@@ -1,63 +1,109 @@
-/* HERO / INICIO */
-.hero {
+/* =========================
+   Estilos: portafolio.css
+   Estilos específicos para la página de portafolio
+   ========================= */
+
+/* ===== SECCIÓN HERO ===== */
+/* Contenedor principal del hero con foto y datos personales */
+.portafolio-hero {
   gap: 1rem;
   display: flex;
   align-items: center;
   margin-bottom: 2rem;
 }
-.hero-photo {
+
+/* Foto redonda del hero con borde sutil */
+.portafolio-hero-photo {
   width: 120px;
   height: 120px;
   border-radius: 50%;
   border: 3px solid rgba(255, 255, 255, 0.05);
 }
-.hero-content .hero-name {
-  font-size: 1.5rem;
-  margin: 0;
-}
-.hero-role {
-  color: var(--muted);
+
+/* Rol o profesión debajo del nombre */
+.portafolio-hero-role {
+  color: rgb(var(--grey));
   margin: 0.15rem 0 0.6rem;
-  font-weight: 500;
-}
-.hero-desc {
-  margin-bottom: 0.6rem;
 }
 
-/* TIMELINE (experiencia) */
-.timeline {
+/* ===== TIMELINE (EXPERIENCIA LABORAL) ===== */
+/* Contenedor vertical de los items de la línea temporal */
+.portafolio-timeline {
   display: flex;
   flex-direction: column;
   gap: 0.8rem;
 }
-.timeline-item {
+
+/* Cada elemento de la línea temporal con icono y contenido */
+.portafolio-timeline-item {
   display: flex;
   gap: 0.9rem;
   align-items: flex-start;
 }
-.timeline-dot {
+
+/* Punto circular de la línea temporal en color verde */
+.portafolio-timeline-dot {
   width: 12px;
   height: 12px;
   border-radius: 50%;
-  background: var(--accent);
+  background: rgb(0, 179, 126);
   margin-top: 6px;
 }
-.timeline-body strong {
+
+/* Contenido fuerte (título) dentro del item de timeline */
+.portafolio-timeline-body strong {
   display: block;
 }
-.timeline-sub {
-  color: var(--muted);
+
+/* Texto secundario con fecha o información adicional */
+.portafolio-timeline-sub {
+  color: rgb(var(--grey));
   font-size: 0.92rem;
 }
 
-/* responsive HERO */
-@media (max-width: 767.98px) {
-  .hero {
-    flex-direction: row;
-    gap: 0.7rem;
-  }
-  .hero-photo {
-    width: 96px;
-    height: 96px;
-  }
+/* ===== SKILLS (HABILIDADES) ===== */
+/* Punto indicador de skill en color verde */
+.portafolio-skill-dot {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  background-color: rgb(0, 179, 126);
+  border-radius: 50%;
+  margin-right: 0.5rem;
+}
+
+/* ===== BOTONES DE PROYECTOS ===== */
+/* Botón de proyecto con icono, borde sutil y transición suave */
+.portafolio-btn {
+  display: inline-flex;
+  align-items: center;
+  border: 1px solid rgba(var(--grey), 0.2);
+  padding: 0.35rem 0.7rem;
+  border-radius: 6px;
+  color: rgb(var(--white));
+  transition: all 0.3s ease;
+}
+
+/* Efecto hover: fondo blanco y texto oscuro (solo si no está deshabilitado) */
+.portafolio-btn:not(.portafolio-disabled-btn):hover {
+  background-color: rgb(var(--white));
+  color: rgb(var(--card)) !important;
+}
+
+/* Efecto hover en icono: cambia a negro para mejor contraste */
+.portafolio-btn:not(.portafolio-disabled-btn):hover img {
+  filter: brightness(0) saturate(100%);
+}
+
+/* Transición suave del icono dentro del botón */
+.portafolio-btn img {
+  transition: filter 0.3s ease;
+}
+
+/* ===== ESTADOS ESPECIALES ===== */
+/* Botón deshabilitado (proyecto no disponible) con fondo rojo */
+.portafolio-disabled-btn {
+  background-color: rgb(var(--red));
+  color: rgb(var(--white));
+  cursor: not-allowed;
 }

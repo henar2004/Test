@@ -1,24 +1,33 @@
-// App.js
+// ==================
+// Componente: App.js
+// Componente raíz de la aplicación con enrutamiento principal
+// ==================
+
 import {
   BrowserRouter as Router,
   Routes,
   Route,
-  Navigate,
   useLocation,
 } from "react-router-dom";
 import { useEffect, useState } from "react";
 
 import Portafolio from "./pages/portafolio.js";
-import Tareas from "./pages/tareas.js";
+import Tareas from "./pages/task.js";
 import Footer from "./components/footer.js";
 import NotFound from "./pages/not-found.js";
 
-// Componente que anima la transición entre páginas
+// ==================
+// COMPONENTE: AnimatedRoutes
+// Anima la transición entre páginas con fade-in/fade-out
+// ==================
 function AnimatedRoutes() {
+  // ===== ESTADO DE UBICACIÓN Y ANIMACIÓN =====
   const location = useLocation();
   const [displayLocation, setDisplayLocation] = useState(location);
   const [opacity, setOpacity] = useState(1);
 
+  // ===== EFECTO: Animación de transición =====
+  // Detecta cambios de ruta y ejecuta fade-out/fade-in
   useEffect(() => {
     if (location.pathname !== displayLocation.pathname) {
       setOpacity(0); // fade-out
@@ -30,8 +39,13 @@ function AnimatedRoutes() {
     }
   }, [location, displayLocation]);
 
+  // ===== LÓGICA: Determinar si mostrar footer =====
+  // El footer NO se muestra en la página 404
+  const isNotFoundPage = displayLocation.pathname === "*" || 
+                         !["/" , "/Gestor-de-tareas"].includes(displayLocation.pathname);
+
   return (
-    <div className="fade-shell" style={{ minHeight: "100vh" }}>
+    <div className="app-fade-shell" style={{ minHeight: "100vh" }}>
       <div
         className="fade-layer"
         style={{
@@ -39,29 +53,40 @@ function AnimatedRoutes() {
           transition: "opacity 0.28s ease-in-out",
         }}
       >
-        {/* Contenido de la página */}
+        {/* ===== CONTENIDO DE LA PÁGINA ===== */}
         <Routes location={displayLocation} key={displayLocation.pathname}>
-          <Route path="/" element={<Navigate to="/Home" replace />} />
-          <Route path="/Home" element={<Portafolio />} />
-          <Route path="/Tareas" element={<Tareas />} />
+          {/* Ruta principal: Portafolio */}
+          <Route path="/" element={<Portafolio />} />
+          
+          {/* Ruta secundaria: Gestor de tareas */}
+          <Route path="/Gestor-de-tareas" element={<Tareas />} />
+          
+          {/* Ruta de error: Página 404 */}
           <Route path="*" element={<NotFound />} />
         </Routes>
 
-        {/* Footer también dentro de la capa animada */}
-        <Footer />
+        {/* ===== FOOTER CONDICIONAL ===== */}
+        {/* Se muestra solo si NO es página de error 404 */}
+        {!isNotFoundPage && <Footer />}
       </div>
     </div>
   );
 }
 
+// ==================
+// COMPONENTE PRINCIPAL: App
+// Renderiza el router y gestiona el favicon según preferencia de tema
+// ==================
 export default function App() {
-  // Cambia el favicon según el modo oscuro o claro
+  // ===== EFECTO: Cambiar favicon según tema oscuro/claro =====
+  // Actualiza el favicon cuando cambia la preferencia de tema del sistema
   useEffect(() => {
     const link =
       document.querySelector("link[rel~='icon']") ||
       document.createElement("link");
     link.rel = "icon";
 
+    // Función para actualizar el favicon
     const setFavicon = () => {
       const isDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
       link.href = isDark ? "/white-favicon.png" : "/black-favicon.png";

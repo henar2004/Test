@@ -1,60 +1,86 @@
+/* =========================
+   Estilos: App.css
+   Estilos globales para toda la aplicación
+   ========================= */
+
+/* ===== VARIABLES CSS GLOBALES ===== */
+/* Define los colores principales usados en toda la aplicación */
 :root {
-  --bg: #212121;
-  --card: #181818;
-  --muted: rgba(255, 255, 255, 0.65);
-  --accent: rgba(0, 179, 126, 1);
+  --bg: 33, 33, 33; /* Fondo principal (gris oscuro) */
+  --card: 24, 24, 24; /* Fondo de tarjetas (negro oscuro) */
+  --white: 255, 255, 255; /* Blanco para texto principal */
+  --grey: 177, 177, 177; /* Gris para texto secundario y bordes */
+  --red: 224, 46, 42; /* Rojo para alertas y estados de error */
 }
 
-/* ===== Fondo global ===== */
+/* ===== ESCALAS DE TAMAÑO DE TEXTO RESPONSIVAS ===== */
+/* Usa clamp() para escalar automáticamente según el tamaño de pantalla */
+.app-text-xs   { font-size: clamp(0.7rem, 1vw, 0.75rem) !important; }       /* Extra pequeño: etiquetas y badges */
+.app-text-sm   { font-size: clamp(0.75rem, 1.2vw, 0.875rem) !important; }   /* Pequeño: texto secundario y botones */
+.app-text-md   { font-size: clamp(0.9rem, 1.5vw, 1rem) !important; }        /* Mediano: texto de párrafos */
+.app-text-lg   { font-size: clamp(1.1rem, 2vw, 1.25rem) !important; }       /* Grande: subtítulos */
+.app-text-xl   { font-size: clamp(1.3rem, 2.5vw, 1.5rem) !important; }      /* Extra grande: títulos de sección */
+.app-text-xxl  { font-size: clamp(1.75rem, 3vw, 2rem) !important; }         /* Muy grande: títulos principales */
+.app-text-xxxl { font-size: clamp(2rem, 4vw, 2.5rem) !important; }          /* Encabezado principal de página */
+
+/* ===== ESTILOS BASE DEL DOCUMENTO ===== */
+/* Asegura altura y ancho mínimos para evitar scroll innecesario */
 html,
 body {
   min-height: 100%;
-  background-color: var(--bg);
+  min-width: 100%;
 }
 
-/* Fondo de página (ocupa viewport visible) */
-.portfolio-bg {
-  background-color: var(--bg);
-  color: #fff; /* todo texto en blanco por defecto */
+/* ===== ESTILOS DE PÁGINA ===== */
+/* Fondo oscuro y texto blanco por defecto en toda la aplicación */
+.app-page-bg {
+  background-color: rgb(var(--bg));
+  color: rgb(var(--white));
 }
 
-/* Hace que la página llegue justo al final de la pantalla */
-.page-fill {
+/* Asegura que la página tenga mínimo 100vh de alto y padding superior/inferior */
+.app-page-fill {
   min-height: 100vh;
   padding-top: 3rem;
   padding-bottom: 3rem;
 }
 
-/* Contenedor central */
-.portfolio-container {
+/* ===== CONTENEDOR GENERAL ===== */
+/* Contenedor centrado con ancho máximo (responsive) */
+.app-container {
   max-width: 920px;
   margin: 0 auto;
   padding: 0;
 }
 
-/* Cards base */
-.portfolio-card {
-  background-color: var(--card);
+/* ===== ESTILOS DE TARJETAS ===== */
+/* Background oscuro para todas las tarjetas de contenido */
+.app-card {
+  background-color: rgb(var(--card));
 }
 
-/* Botones globales */
-.btn-cta,
-.btn-ghost {
-  padding: 0.45rem 0.8rem;
-  border-radius: 8px;
-  text-decoration: none;
-  font-weight: 600;
-  display: inline-block;
+/* Fondo de transición al cambiar de página */
+.app-fade-shell {
+  background-color: rgb(var(--card));
 }
 
-/* Responsive */
-@media (max-width: 767.98px) {
-  .portfolio-container {
-    padding: 0 1rem;
-  }
+/* ===== ESTILOS DE ENLACES ===== */
+/* Todos los enlaces con color blanco y sin subrayado */
+a {
+  color: rgb(var(--white)) !important;
+  text-decoration: none !important;
 }
 
-/* shell siempre opaco con el color de fondo */
-.fade-shell {
-  background-color: #181818; /* color que quieres ver durante la transición */
+/* Efecto hover: cambia color a gris */
+a:hover {
+  color: rgb(var(--grey)) !important;
+}
+
+/* ===== ESTILOS DE FORMULARIOS ===== */
+/* Elimina el contorno azul por defecto de navegadores en inputs y selects */
+.form-control:focus, 
+.form-select:focus {
+  box-shadow: none !important;
+  border-color: #ffffff !important;
+  outline: none !important;
 }

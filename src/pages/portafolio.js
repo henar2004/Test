@@ -1,8 +1,19 @@
-import Cards from "../components/cards.js";
+// ==================
+// Pagina: Portafolio.js
+// Página de portafolio personal
+// ==================
+
 import miFoto from "../images/mi-cara.png";
 import "../styles/portafolio.css";
+import { Link } from "react-router-dom";
+import webIcon from "../images/link.png";
 
+// ==================
+// DATOS: Habilidades
+// Array con habilidades y tecnologías
+// ==================
 export default function Portafolio() {
+  // Habilidades
   const skills = [
     "Lua / Roblox Studio",
     "Python",
@@ -14,6 +25,34 @@ export default function Portafolio() {
     "Bases de datos / APIs",
   ];
 
+  // ==================
+  // DATOS: Proyectos
+  // Lista de proyectos a mostrar en la sección de portfolio
+  // ==================
+  const proyectos = [
+    {
+      titulo: "Proyecto de tareas",
+      descripcion:
+        "Juego desarrollado en Roblox con scripting en Lua, centrado en mecánicas SCP.",
+      enlace: "/Gestor-de-tareas",
+    },
+    {
+      titulo: "Proyecto Web 1",
+      descripcion:
+        "Página web con Bootstrap y JavaScript, enfocada en e-commerce.",
+      enlace: "#",
+    },
+    {
+      titulo: "Proyecto Publicidad",
+      descripcion: "Diseño de contenido publicitario para redes sociales.",
+      enlace: "#",
+    },
+  ];
+
+  // ==================
+  // DATOS: Experiencia laboral
+  // Cronología breve de puestos y responsabilidades
+  // ==================
   const experiencias = [
     {
       title: "Empleado - MC Donald's",
@@ -22,7 +61,7 @@ export default function Portafolio() {
     },
     {
       title: "Diseñadora de publicidad - KIT DIGITAL",
-      period: "Marzo 2025 – Actualidad",
+      period: "Marzo 2025 – Diciembre 2025",
       desc: "Contenido publicitario para redes sociales, contacto con clientes",
     },
     {
@@ -37,29 +76,37 @@ export default function Portafolio() {
     },
   ];
 
+  // ==================
+  // DATOS: Estudios
+  // Formación académica relevante
+  // ==================
   const estudios = [
-    {
-      title: "CFGS — Desarrollo de Aplicaciones Multiplataforma",
-      period: "Sept 2022 – Mayo 2024",
-    },
     {
       title: "CFGM — Sistemas Microinformáticos y Redes",
       period: "Sept 2020 – Mayo 2022",
     },
+    {
+      title: "CFGS — Desarrollo de Aplicaciones Multiplataforma",
+      period: "Sept 2022 – Mayo 2024",
+    },
   ];
 
+  // ==================
+  // RENDER
+  // Estructura principal del componente Portafolio
+  // ==================
   return (
-    <main className="portfolio-bg page-fill">
-      <div className="container portfolio-container">
+    <main className="app-page-bg app-page-fill">
+      <div className="container app-container">
         {/* HERO / INICIO */}
-        <header id="inicio" className="hero mb-5">
-          <img src={miFoto} alt="Henar Garcia Boada" className="hero-photo" />
-          <div className="hero-content">
-            <h1 className="hero-name">Henar Garcia Boada</h1>
-            <p className="hero-role">
-              Desarrolladora de Roblox · Tecnología & Programación
+        <header id="inicio" className="portafolio-hero mb-5">
+          <img src={miFoto} alt="Henar Garcia Boada" className="portafolio-hero-photo" />
+          <div>
+            <h1 className="app-text-xl m-0">Henar Garcia Boada</h1>
+            <p className="fw-semibold app-text-md portafolio-hero-role">
+              Desarrollador de Roblox · Tecnología & Programación
             </p>
-            <p className="hero-desc">
+            <p className="m-0 app-text-md">
               Soy una persona optimista, entusiasta y persistente, con pasión
               por la tecnología y la programación. Desde los 13 años desarrollo
               juegos en Roblox con Lua, y siempre busco aprender y mejorar mis
@@ -69,43 +116,65 @@ export default function Portafolio() {
         </header>
 
         {/* HABILIDADES / ATRIBUTOS */}
-        <h5 className="fw-semibold mb-3">Habilidades & Tecnologías</h5>
-        <section className="portfolio-card p-4 mb-4 rounded">
+        <h5 className="fw-semibold app-text-lg mb-3">Habilidades & Tecnologías</h5>
+        <section className="app-card p-4 mb-4 rounded">
           <div className="row g-3">
             {skills.map((skill, i) => (
               <div key={i} className="col-6 col-md-3 d-flex align-items-center">
-                <span
-                  style={{
-                    display: "inline-block",
-                    width: "10px",
-                    height: "10px",
-                    backgroundColor: "var(--accent)",
-                    borderRadius: "50%",
-                    marginRight: "0.5rem",
-                  }}
-                />
-                <span>{skill}</span>
+                <span className="portafolio-skill-dot" />
+                <span className="app-text-md">{skill}</span>
               </div>
             ))}
           </div>
         </section>
 
         {/* PROYECTOS */}
-        <h5 className="fw-semibold mb-3">Proyectos</h5>
-        <section id="proyectos" className="mb-4">
-          <Cards />
+        <h5 className="fw-semibold app-text-lg mb-3">Proyectos</h5>
+        <section className="mb-4">
+          <div className="row g-4">
+            {proyectos.map((proyecto, index) => (
+              <div className="col-md-4" key={index}>
+                <div className="app-card p-4 rounded h-100 d-flex flex-column justify-content-between position-relative">
+                  <div>
+                    <h6 className="fw-semibold app-text-md">{proyecto.titulo}</h6>
+                    <p className="mb-0">{proyecto.descripcion}</p>
+                  </div>
+
+                  <div className="d-flex gap-3 mt-3 align-items-center">
+                    {proyecto.enlace !== "#" ? (
+                      <Link
+                        to={proyecto.enlace}
+                        className="portafolio-btn app-text-md fw-semibold d-flex align-items-center gap-2"
+                      >
+                        <img src={webIcon} alt="Web" width={18} height={18} />
+                        Abrir
+                      </Link>
+                    ) : (
+                      <button
+                        className="portafolio-btn app-text-md fw-semibold d-flex align-items-center gap-2 portafolio-disabled-btn"
+                        disabled
+                      >
+                        <img src={webIcon} alt="Web" width={18} height={18} />
+                        No disponible
+                      </button>
+                    )}
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
         </section>
 
         {/* EXPERIENCIA LABORAL */}
-        <h5 className="fw-semibold mb-3">Experiencia Laboral</h5>
-        <section className="portfolio-card p-4 mb-4 rounded">
-          <div className="timeline">
+        <h5 className="fw-semibold app-text-lg mb-3">Experiencia Laboral</h5>
+        <section className="app-card p-4 mb-4 rounded">
+          <div className="portafolio-timeline">
             {experiencias.map((exp, i) => (
-              <div key={i} className="timeline-item">
-                <div className="timeline-dot" />
-                <div className="timeline-body">
+              <div key={i} className="portafolio-timeline-item">
+                <div className="portafolio-timeline-dot" />
+                <div className="portafolio-timeline-body">
                   <strong>{exp.title}</strong>
-                  <div className="timeline-sub">
+                  <div className="portafolio-timeline-sub">
                     {exp.period} · {exp.desc}
                   </div>
                 </div>
@@ -119,9 +188,9 @@ export default function Portafolio() {
         <section className="row g-4 mb-4">
           {estudios.map((edu, i) => (
             <div key={i} className="col-md-6">
-              <div className="portfolio-card p-3 rounded d-flex flex-column justify-content-center">
+              <div className="app-card p-3 rounded d-flex flex-column justify-content-center">
                 <div className="fw-semibold mb-1">{edu.title}</div>
-                <div className="timeline-sub">{edu.period}</div>
+                <div className="portafolio-timeline-sub">{edu.period}</div>
               </div>
             </div>
           ))}

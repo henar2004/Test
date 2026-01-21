@@ -1,0 +1,29 @@
+/* =========================
+   Estilos: not-found.css
+   Estilos específicos para la página de error 404
+   ========================= */
+
+/* ===== BOTONES DE NAVEGACIÓN ===== */
+/* Botón de navegación con icono, borde sutil y transición suave */
+.nf-btn {
+  display: inline-flex;
+  align-items: center;
+  border: 1px solid rgba(var(--grey), 0.2);
+  padding: 0.35rem 0.7rem;
+  border-radius: 6px;
+  color: rgb(var(--white));
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+/* Efecto hover: fondo blanco y texto oscuro */
+.nf-btn:hover {
+  background-color: rgb(var(--white));
+  color: rgb(var(--bg)) !important;
+}
+
+/* ===== TEXTO DE ADVERTENCIA ===== */
+/* Texto en color rojo para mensajes de error */
+.nf-warning-text {
+    color: rgb(var(--red));
+}
