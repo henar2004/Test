@@ -99,7 +99,7 @@ export default function Portafolio() {
     <main className="app-page-bg app-page-fill">
       <div className="container app-container">
         {/* HERO / INICIO */}
-        <header id="inicio" className="portafolio-hero mb-5">
+        <header id="inicio" className="portafolio-hero gap-3 mb-5">
           <img src={miFoto} alt="Henar Garcia Boada" className="portafolio-hero-photo" />
           <div>
             <h1 className="app-text-xl m-0">Henar Garcia Boada</h1>
@@ -121,7 +121,7 @@ export default function Portafolio() {
           <div className="row g-3">
             {skills.map((skill, i) => (
               <div key={i} className="col-6 col-md-3 d-flex align-items-center">
-                <span className="portafolio-skill-dot" />
+                <span className="portafolio-skill-dot me-2" />
                 <span className="app-text-md">{skill}</span>
               </div>
             ))}
@@ -168,15 +168,16 @@ export default function Portafolio() {
         {/* EXPERIENCIA LABORAL */}
         <h5 className="fw-semibold app-text-lg mb-3">Experiencia Laboral</h5>
         <section className="app-card p-4 mb-4 rounded">
-          <div className="portafolio-timeline">
+          <div className="portafolio-timeline gap-3">
             {experiencias.map((exp, i) => (
-              <div key={i} className="portafolio-timeline-item">
-                <div className="portafolio-timeline-dot" />
-                <div className="portafolio-timeline-body">
-                  <strong>{exp.title}</strong>
-                  <div className="portafolio-timeline-sub">
-                    {exp.period} · {exp.desc}
-                  </div>
+              <div key={i} className="d-flex gap-3 align-items-start">
+                {/* Dot */}
+                <div className="portafolio-timeline-dot mt-1" />
+
+                {/* Contenido: title arriba, period+desc debajo */}
+                <div className="d-flex flex-column">
+                  <h6 className="fw-semibold app-text-md mb-1">{exp.title}</h6>
+                  <div className="portafolio-timeline-sub app-text-md">{exp.period} · {exp.desc}</div>
                 </div>
               </div>
             ))}
@@ -184,13 +185,13 @@ export default function Portafolio() {
         </section>
 
         {/* ESTUDIOS */}
-        <h5 className="fw-semibold mb-3">Estudios</h5>
+        <h5 className="fw-semibold app-text-lg mb-3">Estudios</h5>
         <section className="row g-4 mb-4">
           {estudios.map((edu, i) => (
             <div key={i} className="col-md-6">
               <div className="app-card p-3 rounded d-flex flex-column justify-content-center">
-                <div className="fw-semibold mb-1">{edu.title}</div>
-                <div className="portafolio-timeline-sub">{edu.period}</div>
+                <div className="fw-semibold app-text-md mb-1">{edu.title}</div>
+                <div className="portafolio-timeline-sub app-text-md">{edu.period}</div>
               </div>
             </div>
           ))}

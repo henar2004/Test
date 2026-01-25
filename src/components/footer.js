@@ -9,7 +9,7 @@ export default function Footer() {
       {/* Contenedor centrado con padding vertical */}
       <div className="container py-3">
         {/* Contenedor flex: copyright a la izquierda, enlaces a la derecha */}
-        <div className="d-flex justify-content-between align-items-center small">
+        <div className="d-flex justify-content-between align-items-center app-text-sm">
           {/* Copyright dinámico con año actual */}
           <span>© {new Date().getFullYear()} Henar Garcia Boada</span>
 
