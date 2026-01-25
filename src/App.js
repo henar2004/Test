@@ -23,7 +23,6 @@ import NotFound from "./pages/not-found.js";
 function AnimatedRoutes() {
   const location = useLocation();
   const [displayLocation, setDisplayLocation] = useState(location);
-  const [opacity, setOpacity] = useState(1);
 
   // ===== EFECTO: Animación de fade aplicada a #root =====
   useEffect(() => {
