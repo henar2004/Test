@@ -7,12 +7,20 @@ import miFoto from "../images/mi-cara.png";
 import "../styles/portafolio.css";
 import { Link } from "react-router-dom";
 import webIcon from "../images/link.png";
+import { useEffect } from "react";
 
 // ==================
 // DATOS: Habilidades
 // Array con habilidades y tecnologías
 // ==================
 export default function Portafolio() {
+useEffect(() => {
+    fetch("/api/db")
+      .then((res) => res.json())
+      .then((data) => console.log("Fetch recibido:", data))
+      .catch((err) => console.error("Error en fetch:", err));
+  }, []);
+
   // Habilidades
   const skills = [
     "Lua / Roblox Studio",

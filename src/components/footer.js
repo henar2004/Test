@@ -15,9 +15,21 @@ export default function Footer() {
 
           {/* Grupo de enlaces: LinkedIn, Email y GitHub */}
           <div className="d-flex gap-3">
-            <a href="http://www.linkedin.com/in/henar-garcia-boada-145893201">LinkedIn</a>
+            <a
+              href="http://www.linkedin.com/in/henar-garcia-boada-145893201"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              LinkedIn
+            </a>
             <a href="mailto:hegarbod@gmail.com">Email</a>
-            <a href="https://github.com/henar2004/Test">GitHub</a>
+            <a
+              href="https://github.com/henar2004/Test"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              GitHub
+            </a>
           </div>
         </div>
       </div>
