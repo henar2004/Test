@@ -20,6 +20,7 @@ useEffect(() => {
       .then((data) => console.log("Fetch recibido:", data))
       .catch((err) => console.error("Error en fetch:", err));
   }, []);
+  
 
   // Habilidades
   const skills = [
