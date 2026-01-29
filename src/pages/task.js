@@ -11,7 +11,6 @@ import React, {
   useCallback,
 } from "react";
 import "../styles/task.css";
-import { useEffect } from "react";
 
 // ==================
 // DATOS ESTÁTICOS
