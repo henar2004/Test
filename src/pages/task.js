@@ -11,6 +11,7 @@ import React, {
   useCallback,
 } from "react";
 import "../styles/task.css";
+import { useEffect } from "react";
 
 // ==================
 // DATOS ESTÁTICOS
@@ -308,8 +309,7 @@ export default function Tareas() {
     <main className="app-page-bg app-page-fill">
       <div className="container app-container">
         {/* ===== ENCABEZADO CON TÍTULO Y BOTONES DE VISTA ===== */}
-        <div className="d-flex justify-content-between align-items-center mb-3">
-          <h3 className="app-text-xxl fw-semibold">Gestor de tareas</h3>
+        <div className="d-inline-flex justify-content-between align-items-center p-3 app-card portafolio-card-list rounded">
           {/* Botones para cambiar entre vista lista y tablero */}
           <div className="d-flex gap-2">
             <button
@@ -423,7 +423,7 @@ export default function Tareas() {
 
           {/* Lista de tags disponibles para filtrar (se muestra cuando tagsOpen es true) */}
           {tagsOpen && (
-            <div className="d-flex flex-wrap gap-2 mt-2">
+            <div className="d-flex flex-wrap gap-2 mt-3">
               {/* Botones de cada tag disponible */}
               {allTags.map((tag) => (
                 <button

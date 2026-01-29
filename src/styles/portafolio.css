@@ -73,6 +73,10 @@
   transition: all 0.3s ease;
 }
 
+.portafolio-card-list {
+margin-bottom: -1rem;
+}
+
 /* Efecto hover: fondo blanco y texto oscuro (solo si no está deshabilitado) */
 .portafolio-btn:not(.portafolio-disabled-btn):hover {
   background-color: rgb(var(--white));

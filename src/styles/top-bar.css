@@ -1,0 +1,14 @@
+.menu-btn {
+  display: inline-flex;
+  align-items: center;
+  border: 1px solid rgba(var(--grey), 0.2);
+  padding: 0.35rem 0.7rem;
+  border-radius: 6px;
+  color: rgb(var(--white));
+  transition: all 0.3s ease;
+}
+
+.menu-btn:not(.portafolio-disabled-btn):hover {
+  background-color: rgb(var(--white));
+  color: rgb(var(--card)) !important;
+}

@@ -15,6 +15,7 @@ import Portafolio from "./pages/portafolio.js";
 import Tareas from "./pages/task.js";
 import Footer from "./components/footer.js";
 import NotFound from "./pages/not-found.js";
+import TopBar from "./components/top-bar.js";
 
 // ==================
 // COMPONENTE: AnimatedRoutes
@@ -40,12 +41,19 @@ function AnimatedRoutes() {
     }
   }, [location, displayLocation]);
 
-  // ===== LÓGICA: Mostrar footer solo si NO es página 404 =====
-  const isNotFoundPage = displayLocation.pathname === "*" || 
-                         !["/", "/Gestor-de-tareas"].includes(displayLocation.pathname);
+  // Mostrar TopBar solo en Gestor-de-tareas
+  const showMenu = displayLocation.pathname === "/Gestor-de-tareas";
+
+  // Footer como antes o ajustado según necesites
+  const showFooter =
+    displayLocation.pathname === "*" ||
+    !["/", "/Gestor-de-tareas"].includes(displayLocation.pathname);
 
   return (
     <>
+      {/* ===== MENU CONDICIONAL ===== */}
+      {showMenu && <TopBar />}
+
       {/* ===== CONTENIDO DE LA PÁGINA ===== */}
       <Routes location={displayLocation} key={displayLocation.pathname}>
         <Route path="/" element={<Portafolio />} />
@@ -54,7 +62,7 @@ function AnimatedRoutes() {
       </Routes>
 
       {/* ===== FOOTER CONDICIONAL ===== */}
-      {!isNotFoundPage && <Footer />}
+      {!showFooter && <Footer />}
     </>
   );
 }
