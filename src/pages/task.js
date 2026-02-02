@@ -189,11 +189,13 @@ export default function Tareas() {
   // ==================
   // LÓGICA: Obtener todos los tags únicos del dataset
   // ==================
-  const allTags = useMemo(() => {
-    const s = new Set();
-    for (const t of tasks) t.tags.forEach((tg) => s.add(tg));
-    return [...s].sort();
-  }, []);
+ /*
+const allTags = useMemo(() => {
+  const s = new Set();
+  for (const t of tasks) t.tags.forEach((tg) => s.add(tg));
+  return [...s].sort();
+}, []);
+*/
 
   // ==================
   // FUNCIONES: Acciones de estado
@@ -281,16 +283,14 @@ export default function Tareas() {
     loading,
   ]);
 
-  {
-    console.log("Filtered en js:", filtered);
-  }
+  console.log("Filtered en js:", filtered);
 
   // ==================
   // RENDER
   // ==================
   return (
     <main className="app-page-bg app-page-fill">
-              {console.log("Filtered en render:", filtered)}
+      {console.log("Filtered en render:", filtered)}
       <div className="container app-container">
         {/* ===== ENCABEZADO CON TÍTULO Y BOTONES DE VISTA ===== */}
         <div className="d-inline-flex justify-content-between align-items-center p-3 app-card portafolio-card-list rounded">
@@ -409,17 +409,19 @@ export default function Tareas() {
           {tagsOpen && (
             <div className="d-flex flex-wrap gap-2 mt-3">
               {/* Botones de cada tag disponible */}
-              {allTags.map((tag) => (
-                <button
-                  key={tag}
-                  className={`app-text-sm fw-semibold task-btn-sm ${
-                    selectedTags.includes(tag) ? "task-active" : ""
-                  }`}
-                  onClick={() => toggleTag(tag)}
-                >
-                  {tag}
-                </button>
-              ))}
+              {/*
+{allTags.map((tag) => (
+  <button
+    key={tag}
+    className={`app-text-sm fw-semibold task-btn-sm ${
+      selectedTags.includes(tag) ? "task-active" : ""
+    }`}
+    onClick={() => toggleTag(tag)}
+  >
+    {tag}
+  </button>
+))}
+*/}
               {/* Botón para limpiar todos los filtros */}
               <button
                 className="task-btn-sm fw-semibold app-text-sm"
