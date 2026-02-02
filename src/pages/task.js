@@ -201,11 +201,14 @@ const allTags = useMemo(() => {
   // FUNCIONES: Acciones de estado
   // ==================
   // Toggle: añade o quita un tag de los filtros seleccionados
-  const toggleTag = useCallback((tag) => {
-    setSelectedTags((prev) =>
-      prev.includes(tag) ? prev.filter((t) => t !== tag) : [...prev, tag],
-    );
-  }, []);
+ /*
+const toggleTag = useCallback((tag) => {
+  setSelectedTags((prev) =>
+    prev.includes(tag) ? prev.filter((t) => t !== tag) : [...prev, tag],
+  );
+}, []);
+*/
+
 
   // Limpia búsqueda y todos los filtros
   const clearFilters = useCallback(() => {
@@ -274,13 +277,13 @@ const allTags = useMemo(() => {
 
     return sorted;
   }, [
+    tasks,
     searchQuery,
     searchMode,
     selectedTags,
     tagMatchMode,
     sortField,
     sortDir,
-    loading,
   ]);
 
   console.log("Filtered en js:", filtered);
