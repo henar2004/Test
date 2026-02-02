@@ -1,70 +1,66 @@
-# Getting Started with Create React App
+# 🌐 Mi Plataforma Web Personal — React
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Bienvenido a mi proyecto web personal, una plataforma en constante evolución creada con **React** y desplegada en **Vercel**. Este repositorio no es una única app cerrada: es un espacio central donde publico proyectos, utilidades y experimentos a medida que los desarrollo.
 
-## Available Scripts
+> ⚠️ Nota: no es necesario ni está pensado para descargarse o ejecutarse localmente desde GitHub. Si quieres ver el resultado final, visita la [web](https://test-gules-ten-34.vercel.app/) en producción.
 
-In the project directory, you can run:
+---
 
-### `npm start`
+## 🔎 Qué encontrarás aquí (resumen)
+- **Portafolio público** con presentación personal y proyectos destacados.  
+- **Aplicaciones y utilidades**: actualmente hay varias páginas funcionales (entre ellas, un gestor de tareas con operaciones CRUD y persistencia en base de datos), y seguiré añadiendo más mini-proyectos.  
+- **Diseño y experiencia**: enfoque en simplicidad, usabilidad y adaptabilidad móvil.  
+- **Código modular** y pensado para escalar: componentes reutilizables, separación por vistas y estilos organizados.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+---
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## ✨ Características destacadas
+- Interfaz clara y navegable: navegación rápida entre secciones y proyectos.
+- Experimentos interactivos que muestran técnicas y patrones de frontend.
+- Persistencia en servidor/servicio externo para funcionalidades que lo requieren (por ejemplo, tareas).
+- Enfoque práctico: cada componente o página está pensado para ser fácilmente ampliable o sustituible sin romper el resto del sitio.
 
-### `npm test`
+---
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## 🎯 Objetivos del proyecto
+- Servir como **tarjeta de presentación técnica**: mostrar cómo organizo y resuelvo problemas reales con React.  
+- Tener un entorno donde probar nuevas ideas (UI, performance, integración con APIs).  
+- Mantener un repositorio vivo que crezca con nuevas funciones y mini-proyectos.
 
-### `npm run build`
+---
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## 🛠 Tecnologías (visión general)
+- **React** (Create React App)  
+- **JavaScript (ES6+)**  
+- **HTML5 / CSS3** (con estilos organizados por componentes/vistas)  
+- **Bootstrap** (para diseño responsivo y componentes listos)  
+- Despliegue: **Vercel**  
+- Integraciones: APIs y servicios de base de datos según la funcionalidad
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+---
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## 📈 Estado y roadmap
+**Estado actual:** proyecto activo — contenido y features en desarrollo.  
+**Próximas mejoras previstas:**
+- Más proyectos públicos añadidos al portafolio.  
+- Mejoras visuales y de accesibilidad.  
+- Opciones avanzadas para algunas apps (autenticación, filtros, sincronización).  
+- Documentación interna y pequeñas guías para quien quiera revisar el código.
 
-### `npm run eject`
+---
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+## 🤝 Colaboración y feedback
+Si te interesa aportar, ver un bug o sugerir una mejora:
+- Abre un **issue** con una descripción breve.
+- Si envías un PR, explica el objetivo y cómo probarlo..
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+---
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+## 👤 Sobre el autor
+Desarrollador **full-stack** con enfoque en frontend.  
+Trabajo con React y en la creación de experiencias web prácticas, escalables y bien organizadas.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+---
 
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## 🌍 Web en producción
+👉 https://test-gules-ten-34.vercel.app/

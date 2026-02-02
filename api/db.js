@@ -1,76 +1,96 @@
-// Importa MongoClient y ServerApiVersion desde el paquete mongodb
-const { MongoClient, ServerApiVersion } = require("mongodb");
+// Importamos el cliente de MongoDB y la versión de la API del servidor
+import { MongoClient, ServerApiVersion } from "mongodb";
 
-// URI de conexión a tu base de datos MongoDB
+// URI de conexión a MongoDB Atlas
 const uri =
   "mongodb+srv://ender536:awdawdawd@cluster0.4onbi1n.mongodb.net/?appName=Cluster0";
 
-let client; // Variable para almacenar la instancia del cliente Mongo
-let clientPromise; // Variable para almacenar la promesa de conexión
+// Promesa global para reutilizar la conexión entre peticiones
+let clientPromise;
 
-// Evita crear múltiples conexiones al reutilizar la conexión global
+// Evita crear múltiples conexiones en desarrollo (hot reload de Next.js)
 if (!global._mongoClientPromise) {
-  client = new MongoClient(uri, {
-    // Crea un nuevo cliente de MongoDB
+  // Creamos el cliente de MongoDB
+  const client = new MongoClient(uri, {
     serverApi: {
-      // Configuración de la API del servidor
-      version: ServerApiVersion.v1,
-      strict: true, // Activa validaciones estrictas
-      deprecationErrors: true, // Muestra errores por funciones obsoletas
+      version: ServerApiVersion.v1, // Versión estable de la API
+      strict: true,                 // Fuerza validaciones estrictas
+      deprecationErrors: true,      // Muestra errores por funciones obsoletas
     },
   });
-  global._mongoClientPromise = client.connect(); // Conecta y guarda la promesa global
+
+  // Guardamos la promesa de conexión globalmente
+  global._mongoClientPromise = client.connect();
 }
 
-clientPromise = global._mongoClientPromise; // Usa la promesa global para la conexión
+// Usamos siempre la misma promesa
+clientPromise = global._mongoClientPromise;
 
-// Función asíncrona para probar la conexión a la base de datos
-async function handler() {
+// ==================
+// API Route: /api/tasks
+// ==================
+export default async function handler(req, res) {
+  // Solo permitimos peticiones GET
+  if (req.method !== "GET") {
+    return res.status(405).json({ error: "Método no permitido" });
+  }
+
   try {
-    const client = await clientPromise; // Espera a que la conexión se establezca
-    const db = client.db("task_app"); // Selecciona la base de datos
+    // Esperamos a que la conexión con MongoDB esté lista
+    const client = await clientPromise;
 
-    // Ejecutamos agregación para hacer "join" con users y tags
+    // Seleccionamos la base de datos
+    const db = client.db("task_app");
+
+    // Agregación para traer tareas con sus tags
     const datos = await db
       .collection("tasks")
       .aggregate([
-        // Lookup para traer info de los usuarios
         {
+          // JOIN con la colección "tags"
           $lookup: {
-            from: "users", // colección a unir
-            localField: "userId", // campo en tasks
-            foreignField: "_id", // campo en users
-            as: "userInfo", // resultado en un array
+            from: "tags",          // Colección destino
+            localField: "tags",    // Array de ObjectId en tasks
+            foreignField: "_id",   // _id en tags
+            as: "tagsInfo",        // Resultado del lookup
           },
         },
-        // Lookup para traer info de los tags
         {
-          $lookup: {
-            from: "tags",
-            localField: "tags", // array de ObjectId en tasks
-            foreignField: "_id", // _id en tags
-            as: "tagsInfo",
-          },
-        },
-        // Opcional: sacar solo los nombres que nos interesan
-        {
+          // Seleccionamos solo los campos necesarios
           $project: {
             _id: 1,
             title: 1,
             text: 1,
             creationDate: 1,
             updateDate: 1,
-            user: { $arrayElemAt: ["$userInfo.name", 0] },
+            // Convertimos los tags a un array de nombres
             tags: "$tagsInfo.nombre",
           },
         },
       ])
       .toArray();
 
-    console.log(datos); // Muestra los datos obtenidos
+    // Adaptamos el resultado al formato que espera Task.js
+    const tasks = datos.map((t) => ({
+      id: t._id.toString(), // Convertimos ObjectId a string
+      title: t.title,
+      text: t.text,
+      tags: t.tags ?? [],   // Aseguramos que siempre sea un array
+      created: t.creationDate
+        ?.toISOString()
+        .slice(0, 10),      // Fecha YYYY-MM-DD
+      updated:
+        t.updateDate?.toISOString().slice(0, 10) ??
+        t.creationDate?.toISOString().slice(0, 10),
+    }));
+
+    // Respondemos con las tareas en JSON
+    res.status(200).json(tasks);
   } catch (e) {
+    // Log del error en servidor
     console.error(e);
+
+    // Respuesta de error genérica
+    res.status(500).json({ error: "Error al obtener tareas" });
   }
 }
-
-handler(); // Llama a la función para probar la conexión

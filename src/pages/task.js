@@ -11,56 +11,11 @@ import React, {
   useCallback,
 } from "react";
 import "../styles/task.css";
+import { useEffect } from "react";
 
 // ==================
 // DATOS ESTÁTICOS
 // ==================
-// Array con tareas de ejemplo para mostrar en la aplicación
-const SAMPLE_TASKS = [
-  {
-    id: 1,
-    title: "Revisar SCP-173",
-    text: "Probar movimientos",
-    tags: [
-      "A123456789",
-      "B123456789",
-      "CA123456789",
-      "DA123456789",
-      "E123456789",
-      "O123456789",
-      "U123456789",
-      "Q123456789",
-      "P123456789",
-      "K123456789",
-      "L123456789",
-      "H123456789",
-      "N123456789",
-      "M123456789",
-      "B123456789",
-      "V123456789",
-      "C123456789",
-      "Z123456789",
-    ],
-    created: "2025-12-01",
-    updated: "2025-12-02",
-  },
-  {
-    id: 2,
-    title: "Escribir documentación",
-    text: "Notas de clase dawd ad awdawdawd awda wdwad awd awdaw dawdaw daw dwdaw daw dawdwa dad awd aw dawdaw daw daw daw dw",
-    tags: ["Docs"],
-    created: "2025-11-28",
-    updated: "2025-12-01",
-  },
-  {
-    id: 3,
-    title: "Actualizar HUD",
-    text: "Arreglar UI en Roblox",
-    tags: ["UI", "Roblox"],
-    created: "2025-12-03",
-    updated: "2025-12-03",
-  },
-];
 
 // ==================
 // COMPONENTE: TagList
@@ -196,6 +151,23 @@ function TagList({ tags }) {
 // Gestor de tareas completo con búsqueda, filtros y dos vistas
 // ==================
 export default function Tareas() {
+  const [tasks, setTasks] = useState([]); // reemplaza SAMPLE_TASKS
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    fetch("/api/db") // apunta a tu API real
+      .then((res) => res.json())
+      .then((data) => {
+        console.log("Fetch recibido:", data);
+        setTasks(data);
+        setLoading(false); // ya no está cargando
+      })
+      .catch((err) => {
+        console.error("Error en fetch:", err);
+        setLoading(false); // aunque haya error, deja de estar cargando
+      });
+  }, []);
+
   // ===== ESTADO DE VISTA =====
   const [view, setView] = useState("list"); // "list" o "board"
 
@@ -219,7 +191,7 @@ export default function Tareas() {
   // ==================
   const allTags = useMemo(() => {
     const s = new Set();
-    for (const t of SAMPLE_TASKS) t.tags.forEach((tg) => s.add(tg));
+    for (const t of tasks) t.tags.forEach((tg) => s.add(tg));
     return [...s].sort();
   }, []);
 
@@ -248,7 +220,7 @@ export default function Tareas() {
     const q = searchQuery.trim().toLowerCase();
 
     // Filtra tareas por búsqueda y tags seleccionados
-    const res = SAMPLE_TASKS.filter((task) => {
+    const res = tasks.filter((task) => {
       // ===== FILTRO DE BÚSQUEDA =====
       if (q) {
         if (searchMode === "title") {
@@ -299,13 +271,26 @@ export default function Tareas() {
     });
 
     return sorted;
-  }, [searchQuery, searchMode, selectedTags, tagMatchMode, sortField, sortDir]);
+  }, [
+    searchQuery,
+    searchMode,
+    selectedTags,
+    tagMatchMode,
+    sortField,
+    sortDir,
+    loading,
+  ]);
+
+  {
+    console.log("Filtered en js:", filtered);
+  }
 
   // ==================
   // RENDER
   // ==================
   return (
     <main className="app-page-bg app-page-fill">
+              {console.log("Filtered en render:", filtered)}
       <div className="container app-container">
         {/* ===== ENCABEZADO CON TÍTULO Y BOTONES DE VISTA ===== */}
         <div className="d-inline-flex justify-content-between align-items-center p-3 app-card portafolio-card-list rounded">
@@ -449,52 +434,57 @@ export default function Tareas() {
         {/* ===== VISTA: LISTA ===== */}
         {view === "list" ? (
           <div className="list-group">
-            {/* Mapea y renderiza cada tarea filtrada en formato lista */}
-            {filtered.map((task) => (
-              <div key={task.id} className="app-card rounded p-3 mb-4">
-                <div className="fw-semibold app-text-md">{task.title}</div>
-                <div className="app-text-sm task-timeline-sub mb-2">
-                  Creado: {task.created} · Modificado: {task.updated}
-                </div>
-                <TagList tags={task.tags} />
+            {loading ? (
+              <div className="app-card app-text-md rounded p-3">
+                Cargando tareas...
               </div>
-            ))}
-            {/* Mensaje cuando no hay tareas que coincidan */}
-            {filtered.length === 0 && (
+            ) : filtered.length === 0 ? (
               <div className="app-card app-text-md rounded p-3">
                 No hay tareas que coincidan.
               </div>
+            ) : (
+              filtered.map((task) => (
+                <div key={task.id} className="app-card rounded p-3 mb-4">
+                  <div className="fw-semibold app-text-md">{task.title}</div>
+                  <div className="app-text-sm task-timeline-sub mb-2">
+                    Creado: {task.created} · Modificado: {task.updated}
+                  </div>
+                  <TagList tags={task.tags} />
+                </div>
+              ))
             )}
           </div>
         ) : (
-          /* ===== VISTA: TABLERO ===== */
           <div className="row g-4">
-            {/* Mapea y renderiza cada tarea filtrada en formato tarjetas */}
-            {filtered.map((task) => (
-              <div key={task.id} className="col-md-4">
-                <div className="app-card rounded p-3 d-flex flex-column h-100">
-                  <div className="fw-semibold app-text-md">{task.title}</div>
-                  <div className="app-text-sm task-timeline-sub">
-                    Creado: {task.created} · Modificado: {task.updated}
-                  </div>
-                  {/* Descripción de la tarea truncada a 2 líneas */}
-                  <div className="app-text-sm task-timeline-sub mt-2 task-two-lines mb-3">
-                    {task.text}
-                  </div>
-                  {/* Tags al final del contenedor (mt-auto lo empuja al final) */}
-                  <div className="mt-auto">
-                    <TagList tags={task.tags} />
-                  </div>
+            {loading ? (
+              <div className="col-12">
+                <div className="app-card app-text-md rounded p-3">
+                  Cargando tareas...
                 </div>
               </div>
-            ))}
-            {/* Mensaje cuando no hay tareas que coincidan */}
-            {filtered.length === 0 && (
+            ) : filtered.length === 0 ? (
               <div className="col-12">
                 <div className="app-card app-text-md rounded p-3">
                   No hay tareas que coincidan.
                 </div>
               </div>
+            ) : (
+              filtered.map((task) => (
+                <div key={task.id} className="col-md-4">
+                  <div className="app-card rounded p-3 d-flex flex-column h-100">
+                    <div className="fw-semibold app-text-md">{task.title}</div>
+                    <div className="app-text-sm task-timeline-sub">
+                      Creado: {task.created} · Modificado: {task.updated}
+                    </div>
+                    <div className="app-text-sm task-timeline-sub mt-2 task-two-lines mb-3">
+                      {task.text}
+                    </div>
+                    <div className="mt-auto">
+                      <TagList tags={task.tags} />
+                    </div>
+                  </div>
+                </div>
+              ))
             )}
           </div>
         )}
