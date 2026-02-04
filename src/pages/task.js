@@ -100,7 +100,7 @@ function TagList({ tags }) {
       />
 
       {/* Contenedor visible de tags */}
-      <div ref={containerRef} className="d-flex gap-2 flex-wrap">
+      <div ref={containerRef} className="d-flex gap-2 flex-wrap mt-2">
         {/* Mapea y renderiza tags visibles con tooltip al hover */}
         {tags.slice(0, visibleCount).map((tag, i) => (
           <div
@@ -111,8 +111,9 @@ function TagList({ tags }) {
           >
             {/* Tag truncado */}
             <div className="task-btn-sm fw-semibold app-text-xs task-tag-item">
-              {truncated[i]}
+              {truncated[i].charAt(0).toUpperCase() + truncated[i].slice(1)}
             </div>
+
             {/* Tooltip con tag completo si está truncado */}
             {hoverIndex === i && (
               <div className="task-btn-sm task-tag-tooltip app-text-xs">
@@ -152,19 +153,23 @@ function TagList({ tags }) {
 // ==================
 export default function Tareas() {
   const [tasks, setTasks] = useState([]); // reemplaza SAMPLE_TASKS
+  const [allTags, setAllTags] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch("/api/db") // apunta a tu API real
+    fetch("/api/db")
       .then((res) => res.json())
       .then((data) => {
         console.log("Fetch recibido:", data);
-        setTasks(data);
-        setLoading(false); // ya no está cargando
+
+        setTasks(data.tasks); // 👈 tareas
+        setAllTags(data.tags); // 👈 tags globales
+
+        setLoading(false);
       })
       .catch((err) => {
         console.error("Error en fetch:", err);
-        setLoading(false); // aunque haya error, deja de estar cargando
+        setLoading(false);
       });
   }, []);
 
@@ -187,28 +192,14 @@ export default function Tareas() {
   const [tagsOpen, setTagsOpen] = useState(false); // Panel de filtros abierto/cerrado
 
   // ==================
-  // LÓGICA: Obtener todos los tags únicos del dataset
-  // ==================
- /*
-const allTags = useMemo(() => {
-  const s = new Set();
-  for (const t of tasks) t.tags.forEach((tg) => s.add(tg));
-  return [...s].sort();
-}, []);
-*/
-
-  // ==================
   // FUNCIONES: Acciones de estado
   // ==================
   // Toggle: añade o quita un tag de los filtros seleccionados
- /*
-const toggleTag = useCallback((tag) => {
-  setSelectedTags((prev) =>
-    prev.includes(tag) ? prev.filter((t) => t !== tag) : [...prev, tag],
-  );
-}, []);
-*/
-
+  const toggleTag = useCallback((tag) => {
+    setSelectedTags((prev) =>
+      prev.includes(tag) ? prev.filter((t) => t !== tag) : [...prev, tag],
+    );
+  }, []);
 
   // Limpia búsqueda y todos los filtros
   const clearFilters = useCallback(() => {
@@ -277,13 +268,13 @@ const toggleTag = useCallback((tag) => {
 
     return sorted;
   }, [
-    tasks,
     searchQuery,
     searchMode,
     selectedTags,
     tagMatchMode,
     sortField,
     sortDir,
+    tasks,
   ]);
 
   console.log("Filtered en js:", filtered);
@@ -412,19 +403,18 @@ const toggleTag = useCallback((tag) => {
           {tagsOpen && (
             <div className="d-flex flex-wrap gap-2 mt-3">
               {/* Botones de cada tag disponible */}
-              {/*
-{allTags.map((tag) => (
-  <button
-    key={tag}
-    className={`app-text-sm fw-semibold task-btn-sm ${
-      selectedTags.includes(tag) ? "task-active" : ""
-    }`}
-    onClick={() => toggleTag(tag)}
-  >
-    {tag}
-  </button>
-))}
-*/}
+              {allTags.map((tag) => (
+                <button
+                  key={tag}
+                  className={`app-text-sm fw-semibold task-btn-sm ${
+                    selectedTags.includes(tag) ? "task-active" : ""
+                  }`}
+                  onClick={() => toggleTag(tag)}
+                >
+                  {tag.charAt(0).toUpperCase() + tag.slice(1)}
+                </button>
+              ))}
+
               {/* Botón para limpiar todos los filtros */}
               <button
                 className="task-btn-sm fw-semibold app-text-sm"
@@ -443,15 +433,19 @@ const toggleTag = useCallback((tag) => {
               <div className="app-card app-text-md rounded p-3">
                 Cargando tareas...
               </div>
+            ) : tasks.length === 0 ? (
+              <div className="app-card app-text-md rounded p-3">
+                No hay tareas en la base de datos.
+              </div>
             ) : filtered.length === 0 ? (
               <div className="app-card app-text-md rounded p-3">
-                No hay tareas que coincidan.
+                No hay tareas que coincidan con los filtros.
               </div>
             ) : (
               filtered.map((task) => (
                 <div key={task.id} className="app-card rounded p-3 mb-4">
                   <div className="fw-semibold app-text-md">{task.title}</div>
-                  <div className="app-text-sm task-timeline-sub mb-2">
+                  <div className="app-text-sm task-timeline-sub">
                     Creado: {task.created} · Modificado: {task.updated}
                   </div>
                   <TagList tags={task.tags} />
@@ -467,10 +461,16 @@ const toggleTag = useCallback((tag) => {
                   Cargando tareas...
                 </div>
               </div>
+            ) : tasks.length === 0 ? (
+              <div className="col-12">
+                <div className="app-card app-text-md rounded p-3">
+                  No hay tareas en la base de datos.
+                </div>
+              </div>
             ) : filtered.length === 0 ? (
               <div className="col-12">
                 <div className="app-card app-text-md rounded p-3">
-                  No hay tareas que coincidan.
+                  No hay tareas que coincidan con los filtros.
                 </div>
               </div>
             ) : (
@@ -481,12 +481,10 @@ const toggleTag = useCallback((tag) => {
                     <div className="app-text-sm task-timeline-sub">
                       Creado: {task.created} · Modificado: {task.updated}
                     </div>
-                    <div className="app-text-sm task-timeline-sub mt-2 task-two-lines mb-3">
+                    <div className="app-text-sm task-timeline-sub mt-2 task-two-lines">
                       {task.text}
                     </div>
-                    <div className="mt-auto">
-                      <TagList tags={task.tags} />
-                    </div>
+                    <TagList tags={task.tags} />
                   </div>
                 </div>
               ))
