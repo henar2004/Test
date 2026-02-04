@@ -160,15 +160,13 @@ export default function Tareas() {
     fetch("/api/db")
       .then((res) => res.json())
       .then((data) => {
-        console.log("Fetch recibido:", data);
 
-        setTasks(data.tasks); // 👈 tareas
-        setAllTags(data.tags); // 👈 tags globales
+        setTasks(data.tasks);
+        setAllTags(data.tags);
 
         setLoading(false);
       })
       .catch((err) => {
-        console.error("Error en fetch:", err);
         setLoading(false);
       });
   }, []);
@@ -277,14 +275,11 @@ export default function Tareas() {
     tasks,
   ]);
 
-  console.log("Filtered en js:", filtered);
-
   // ==================
   // RENDER
   // ==================
   return (
     <main className="app-page-bg app-page-fill">
-      {console.log("Filtered en render:", filtered)}
       <div className="container app-container">
         {/* ===== ENCABEZADO CON TÍTULO Y BOTONES DE VISTA ===== */}
         <div className="d-inline-flex justify-content-between align-items-center p-3 app-card portafolio-card-list rounded">
