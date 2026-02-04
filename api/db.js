@@ -1,8 +1,8 @@
 // Importamos el cliente de MongoDB y la versión de la API del servidor
 import { MongoClient, ServerApiVersion } from "mongodb";
 
-const uri = process.env.MONGODB_URI || "mongodb+srv://ender536:awdawdawd@cluster0.4onbi1n.mongodb.net/?appName=Cluster0";
-
+const uri = process.env.MONGODB_URI;
+console.log("MongoDB URI:", uri ? "✅ Configurada" : "❌ No configurada", uri);
 let clientPromise;
 
 if (!global._mongoClientPromise) {
