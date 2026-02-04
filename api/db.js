@@ -1,8 +1,7 @@
 // Importamos el cliente de MongoDB y la versión de la API del servidor
 import { MongoClient, ServerApiVersion } from "mongodb";
 
-const uri = process.env.MONGODB_URI || "mongodb+srv://usuario:password@cluster0.4onbi1n.mongodb.net/task_app?retryWrites=true&w=majority";
-
+const uri = process.env.MONGODB_URI || "mongodb+srv://ender536:awdawdawd@cluster0.4onbi1n.mongodb.net/?appName=Cluster0";
 
 let clientPromise;
 
