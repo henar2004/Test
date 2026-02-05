@@ -34,7 +34,7 @@ export default function Portafolio() {
       titulo: "Proyecto de tareas",
       descripcion:
         "Juego desarrollado en Roblox con scripting en Lua, centrado en mecánicas SCP.",
-      enlace: "/Gestor-de-tareas",
+      enlace: "/gestor-de-tareas",
     },
     {
       titulo: "Proyecto Web 1",

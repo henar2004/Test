@@ -19,7 +19,7 @@
 }
 
 /* Estado hover y activo (mismo estilo visual) */
-.task-btn-sm:hover,
+.task-btn-sm:not(.task-card-disabled-btn):hover,
 .task-btn-sm.task-active {
   background-color: rgb(var(--white));
   color: rgb(var(--card));
@@ -77,6 +77,23 @@
     opacity 120ms ease,
     transform 120ms ease;
 }
+
+.task-card-buttons {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+}
+
+.task-card-disabled-btn {
+  background-color: rgb(var(--red));
+  color: rgb(var(--white));
+}
+
+.task-card-disabled-btn:hover {
+  color: rgba(var(--white),  0.6);
+  background-color: rgba(var(--red), 0.6);
+}
+
 
 /* Animación de entrada del tooltip al pasar el mouse */
 .task-tag-wrapper:hover .task-tag-tooltip,

@@ -1,19 +1,16 @@
-import { Link, useLocation } from "react-router-dom";
-import { useState } from "react";
+// TopBar.js
+import { Link } from "react-router-dom";
 import "../styles/top-bar.css";
 
-export default function Menu() {
-  const { pathname } = useLocation();
-
+export default function TopBar({ location }) {
   const titles = {
     "/": "Inicio",
     "/portafolio": "Portafolio",
-    "/login": "Iniciar sesión",
-    "/Gestor-de-tareas": "Gestor de tareas",
+    "/login": "Iniciar Sesión",
+    "/gestor-de-tareas": "Gestor de tareas",
   };
 
-  // Se inicializa solo una vez con el valor actual de pathname
-  const [title] = useState(titles[pathname] || "Página");
+  const title = titles[location.pathname] || "Página";
 
   return (
     <div className="app-page-bg">

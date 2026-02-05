@@ -160,7 +160,6 @@ export default function Tareas() {
     fetch("/api/db")
       .then((res) => res.json())
       .then((data) => {
-
         setTasks(data.tasks);
         setAllTags(data.tags);
 
@@ -438,7 +437,20 @@ export default function Tareas() {
               </div>
             ) : (
               filtered.map((task) => (
-                <div key={task.id} className="app-card rounded p-3 mb-4">
+                <div
+                  key={task.id}
+                  className="app-card rounded p-3 mb-4 position-relative"
+                >
+                  {/* ===== BOTONES FLOTANTES A LA DERECHA ===== */}
+                  <div className="d-flex gap-2 task-card-buttons">
+                    <button className="task-btn-sm fw-semibold app-text-sm">
+                      Editar
+                    </button>
+                    <button className="task-btn-sm task-card-disabled-btn fw-semibold app-text-sm">
+                      Eliminar
+                    </button>
+                  </div>
+
                   <div className="fw-semibold app-text-md">{task.title}</div>
                   <div className="app-text-sm task-timeline-sub">
                     Creado: {task.created} · Modificado: {task.updated}

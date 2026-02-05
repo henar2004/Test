@@ -16,6 +16,7 @@ import Tareas from "./pages/task.js";
 import Footer from "./components/footer.js";
 import NotFound from "./pages/not-found.js";
 import TopBar from "./components/top-bar.js";
+import Login from "./pages/login-page.js";
 
 // ==================
 // COMPONENTE: AnimatedRoutes
@@ -42,22 +43,25 @@ function AnimatedRoutes() {
   }, [location, displayLocation]);
 
   // Mostrar TopBar solo en Gestor-de-tareas
-  const showMenu = displayLocation.pathname === "/Gestor-de-tareas";
+  const showMenu =
+    displayLocation.pathname === "/login" ||
+    displayLocation.pathname === "/gestor-de-tareas";
 
   // Footer como antes o ajustado según necesites
   const showFooter =
     displayLocation.pathname === "*" ||
-    !["/", "/Gestor-de-tareas"].includes(displayLocation.pathname);
+    !["/", "/gestor-de-tareas", "/login"].includes(displayLocation.pathname);
 
   return (
     <>
       {/* ===== MENU CONDICIONAL ===== */}
-      {showMenu && <TopBar />}
+      {showMenu && <TopBar location={displayLocation} />}
 
       {/* ===== CONTENIDO DE LA PÁGINA ===== */}
       <Routes location={displayLocation} key={displayLocation.pathname}>
         <Route path="/" element={<Portafolio />} />
-        <Route path="/Gestor-de-tareas" element={<Tareas />} />
+        <Route path="/gestor-de-tareas" element={<Tareas />} />
+        <Route path="/login" element={<Login />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
 
