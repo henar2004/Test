@@ -1,3 +1,8 @@
+// ==================
+// Pagina: login-page.js
+// Pagina de login para usuarios registrados, con formulario de email y contraseña, y enlaces a recuperar contraseña y registro.
+// ==================
+
 import "../styles/login-page.css";
 import { Link } from "react-router-dom";
 
@@ -5,7 +10,6 @@ export default function Login() {
   return (
     <main className="app-page-bg d-flex justify-content-center align-items-center">
       <div className="container app-container d-flex flex-column gap-3">
-        
         <section className="app-card login-box p-4 rounded">
           {/* Nombre */}
           <div className="mb-3">
@@ -37,29 +41,26 @@ export default function Login() {
             />
           </div>
 
-          {/* RECORDAR SESIÓN */}
+          {/* Recuperar contraseña */}
           <div className="d-flex justify-content-end align-items-center">
             <Link to="/recuperar" className="app-text-sm fw-semibold">
               Has olvidado la contraseña?
             </Link>
           </div>
 
-          {/* Botón */}
-          <button className="login-btn fw-semibold app-text-md">
-            Entrar
-          </button>
+          {/* Enviar mail */}
+          <button className="app-btn fw-semibold app-text-md">Entrar</button>
         </section>
 
-        {/* Texto extra */}
+        {/* Crear cuenta */}
         <div className="text-center app-text-sm">
           <p className="mb-1">
-            ¿No tienes cuenta?{" "}
+            ¿No tienes cuenta?
             <Link to="/registro" className="fw-semibold">
               Crear una ahora
             </Link>
           </p>
         </div>
-
       </div>
     </main>
   );

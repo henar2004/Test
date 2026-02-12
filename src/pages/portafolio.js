@@ -15,14 +15,24 @@ import webIcon from "../images/link.png";
 export default function Portafolio() {
   // Habilidades
   const skills = [
-    "Lua / Roblox Studio",
+    "Lua",
     "Python",
     "Kotlin",
     "C#",
     "Java",
-    "Bootstrap / CSS / JS",
-    "Laravel / Express",
-    "Bases de datos / APIs",
+    "React",
+    "Bootstrap",
+    "CSS",
+    "JavaScript",
+    "Laravel",
+    "Express",
+    "API",
+    "Serverless",
+    "MongoDB",
+    "GitHub",
+    "CI/CD",
+    "UI",
+    "Diseño",
   ];
 
   // ==================
@@ -31,20 +41,33 @@ export default function Portafolio() {
   // ==================
   const proyectos = [
     {
-      titulo: "Proyecto de tareas",
-      descripcion:
-        "Juego desarrollado en Roblox con scripting en Lua, centrado en mecánicas SCP.",
+      titulo: "Gestor de tareas",
+      descripcion: "Web simple de gestión de tareas con el sistema CRUD.",
       enlace: "/gestor-de-tareas",
     },
     {
-      titulo: "Proyecto Web 1",
-      descripcion:
-        "Página web con Bootstrap y JavaScript, enfocada en e-commerce.",
+      titulo: "Transcriptor de videos",
+      descripcion: "Web que transcribe el audio de un video usando una API.",
       enlace: "#",
     },
     {
-      titulo: "Proyecto Publicidad",
-      descripcion: "Diseño de contenido publicitario para redes sociales.",
+      titulo: "Algoritmo heurístico",
+      descripcion: "Web que revisa el animo de una persona mediante el análisis del texto.",
+      enlace: "#",
+    },
+    {
+      titulo: "Explorador de ciudades",
+      descripcion: "Buscador de información sobre ciudades usando APIs.",
+      enlace: "#",
+    },
+    {
+      titulo: "Retro shooter",
+      descripcion: "Juego de disparos desarrollado con JavaScript y HTML.",
+      enlace: "#",
+    },
+    {
+      titulo: "Ajedrez 2D",
+      descripcion: "Juego de ajedrez desarrollado con JavaScript y HTML.",
       enlace: "#",
     },
   ];
@@ -57,22 +80,22 @@ export default function Portafolio() {
     {
       title: "Empleado - MC Donald's",
       period: "Abril 2025 – Actualidad",
-      desc: "Atención a clientes, gestión de pagos, trabajo en equipo bajo presión",
+      desc: "Atención a clientes, gestión de pagos, trabajo en equipo bajo presión.",
     },
     {
       title: "Diseñadora de publicidad - KIT DIGITAL",
       period: "Marzo 2025 – Diciembre 2025",
-      desc: "Contenido publicitario para redes sociales, contacto con clientes",
+      desc: "Contenido publicitario para redes sociales, contacto con clientes.",
     },
     {
       title: "Diseñadora Web - KIT DIGITAL",
       period: "Marzo 2024 – Agosto 2024",
-      desc: "Páginas web, contenido publicitario y gestión de clientes",
+      desc: "Páginas web, contenido publicitario y gestión de clientes.",
     },
     {
       title: "Técnico de TI - Miscota",
       period: "Febrero 2021 – Marzo 2022",
-      desc: "Reparación de ordenadores, soporte técnico remoto, bases de datos",
+      desc: "Reparación de ordenadores, soporte técnico remoto, bases de datos.",
     },
   ];
 
@@ -100,27 +123,34 @@ export default function Portafolio() {
       <div className="container app-container">
         {/* HERO / INICIO */}
         <header id="inicio" className="portafolio-hero gap-3 mb-5">
-          <img src={miFoto} alt="Henar Garcia Boada" className="portafolio-hero-photo" />
+          <img
+            src={miFoto}
+            alt="Henar Garcia Boada"
+            className="portafolio-hero-photo"
+          />
           <div>
             <h1 className="app-text-xl m-0">Henar Garcia Boada</h1>
             <p className="fw-semibold app-text-md portafolio-hero-role">
-              Desarrollador de Roblox · Tecnología & Programación
+              Desarrollador Web · Tecnología & Programación
             </p>
             <p className="m-0 app-text-md">
               Soy una persona optimista, entusiasta y persistente, con pasión
-              por la tecnología y la programación. Desde los 13 años desarrollo
-              juegos en Roblox con Lua, y siempre busco aprender y mejorar mis
-              habilidades.
+              por la tecnología y la programación. Me especializo en desarrollo
+              Fullstack, trabajando tanto en frontend como backend con múltiples
+              lenguajes y frameworks, creando aplicaciones completas y
+              funcionales, siempre buscando aprender y mejorar mis habilidades.
             </p>
           </div>
         </header>
 
         {/* HABILIDADES / ATRIBUTOS */}
-        <h5 className="fw-semibold app-text-lg mb-3">Habilidades & Tecnologías</h5>
+        <h5 className="fw-semibold app-text-lg mb-3">
+          Habilidades & Tecnologías
+        </h5>
         <section className="app-card p-4 mb-4 rounded">
           <div className="row g-3">
             {skills.map((skill, i) => (
-              <div key={i} className="col-6 col-md-3 d-flex align-items-center">
+              <div key={i} className="col-6 col-md-2 d-flex align-items-center">
                 <span className="portafolio-skill-dot me-2" />
                 <span className="app-text-md">{skill}</span>
               </div>
@@ -136,7 +166,9 @@ export default function Portafolio() {
               <div className="col-md-4" key={index}>
                 <div className="app-card p-4 rounded h-100 d-flex flex-column justify-content-between position-relative">
                   <div>
-                    <h6 className="fw-semibold app-text-md">{proyecto.titulo}</h6>
+                    <h6 className="fw-semibold app-text-md">
+                      {proyecto.titulo}
+                    </h6>
                     <p className="mb-0">{proyecto.descripcion}</p>
                   </div>
 
@@ -177,7 +209,9 @@ export default function Portafolio() {
                 {/* Contenido: title arriba, period+desc debajo */}
                 <div className="d-flex flex-column">
                   <h6 className="fw-semibold app-text-md mb-1">{exp.title}</h6>
-                  <div className="portafolio-timeline-sub app-text-md">{exp.period} · {exp.desc}</div>
+                  <div className="portafolio-timeline-sub app-text-md">
+                    {exp.period} · {exp.desc}
+                  </div>
                 </div>
               </div>
             ))}
@@ -191,7 +225,9 @@ export default function Portafolio() {
             <div key={i} className="col-md-6">
               <div className="app-card p-3 rounded d-flex flex-column justify-content-center">
                 <div className="fw-semibold app-text-md mb-1">{edu.title}</div>
-                <div className="portafolio-timeline-sub app-text-md">{edu.period}</div>
+                <div className="portafolio-timeline-sub app-text-md">
+                  {edu.period}
+                </div>
               </div>
             </div>
           ))}

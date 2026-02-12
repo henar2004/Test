@@ -3,8 +3,7 @@
    Estilos globales para toda la aplicación
    ========================= */
 
-/* ===== VARIABLES CSS GLOBALES ===== */
-/* Colores principales usados en toda la app */
+/* ===== COLORES ===== */
 :root {
   --bg: 33, 33, 33; /* Fondo principal (gris oscuro) */
   --card: 24, 24, 24; /* Fondo de tarjetas (negro oscuro) */
@@ -14,8 +13,7 @@
   --green: 0, 179, 126; /* Verde para elementos destacados */
 }
 
-/* ===== ESCALAS DE TAMAÑO DE TEXTO RESPONSIVAS ===== */
-/* clamp() ajusta tamaño según ancho de pantalla, con límites mínimo/máximo */
+/* ===== TIPOGRAFÍA ===== */
 .app-text-xs {
   font-size: clamp(0.7rem, 1vw, 0.75rem) !important;
 } /* Extra pequeño: etiquetas y badges */
@@ -38,7 +36,7 @@
   font-size: clamp(2rem, 4vw, 2.5rem) !important;
 } /* Encabezado principal */
 
-/* ===== ESTILOS BASE DEL DOCUMENTO ===== */
+/* ===== ESTILOS DEL DOCUMENTO ===== */
 /* Asegura que html, body y #root ocupen toda la ventana y elimina margenes/paddings por defecto */
 html,
 body {
@@ -51,10 +49,17 @@ body {
 #root {
   min-height: 100%; /* Ocupa todo el espacio disponible */
   display: flex; /* Flexbox para organizar main y footer verticalmente */
-  flex-direction: column; /* Dirección vertical */
+  flex-direction: column;
 }
 
-/* ===== ESTILOS DE PÁGINA ===== */
+/* Main ocupa todo el espacio vertical restante y mantiene layout en columna */
+main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ===== CONTENEDORES Y COMPONENTES ===== */
 /* Fondo y color de texto principal */
 .app-page-bg {
   background-color: rgb(var(--bg));
@@ -67,14 +72,6 @@ body {
   padding-bottom: 2rem;
 }
 
-/* Main ocupa todo el espacio vertical restante y mantiene layout en columna */
-main {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-}
-
-/* ===== CONTENEDOR GENERAL ===== */
 /* Contenedor centrado y ancho máximo */
 .app-container {
   max-width: 920px;
@@ -82,7 +79,6 @@ main {
   padding: 0;
 }
 
-/* ===== ESTILOS DE TARJETAS ===== */
 /* Fondo oscuro para todas las tarjetas */
 .app-card {
   background-color: rgb(var(--card));
@@ -100,11 +96,29 @@ a:hover {
   color: rgb(var(--grey)) !important;
 }
 
-/* ===== ESTILOS DE FORMULARIOS ===== */
-/* Quita sombra azul y outline en inputs/selects al focus */
+/* ===== ESTILOS DE BOTONES ===== */
+/* Boton general */
+.app-btn {
+  display: inline-flex;
+  align-items: center;
+  border: 1px solid rgba(var(--grey), 0.2);
+  padding: 0.35rem 0.7rem;
+  border-radius: 6px;
+  background: transparent;
+  color: rgb(var(--white));
+  transition: all 0.3s ease;
+}
+
+.app-btn:hover {
+  background-color: rgb(var(--white)) !important;
+  color: rgb(var(--card)) !important;
+}
+
+/* ===== AJUSTES BOOTSRAP ===== */
+/* Quita glow/outline azul en inputs/selects al focus */
 .form-control:focus,
 .form-select:focus {
   box-shadow: none !important;
-  border-color: #ffffff !important;
+  border-color: rgb(var(--white)) !important;
   outline: none !important;
 }

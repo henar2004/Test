@@ -1,36 +1,7 @@
 /* =========================
    Estilos: task.css
-   Estilos específicos para la página de gestor de tareas
+   Estilos específicos para la página de gestión de tareas (Task)
    ========================= */
-
-/* ===== BOTONES PEQUEÑOS ===== */
-/* Botón pequeño base con estilos por defecto */
-.task-btn-sm {
-  display: inline-flex;
-  align-items: center;
-  border: 1px solid rgba(var(--grey), 0.2);
-  padding: 0.35rem 0.7rem;
-  border-radius: 6px;
-  background: transparent;
-  color: rgb(var(--white));
-  cursor: pointer;
-  transition: all 0.3s ease;
-  -webkit-tap-highlight-color: transparent;
-}
-
-/* Estado hover y activo (mismo estilo visual) */
-.task-btn-sm:not(.task-card-disabled-btn):hover,
-.task-btn-sm.task-active {
-  background-color: rgb(var(--white));
-  color: rgb(var(--card));
-}
-
-/* Estado focus para navegación por teclado (accesibilidad) */
-.task-btn-sm:focus-visible {
-  outline: 3px solid rgba(var(--white), 0.08);
-  outline-offset: 2px;
-  box-shadow: 0 0 0 3px rgba(var(--grey), 0.06);
-}
 
 /* ===== TEXTO SECUNDARIO Y TRUNCADO ===== */
 /* Subtítulo con fechas de creación/modificación */
@@ -69,7 +40,7 @@
   left: 50%;
   transform: translateX(-50%) translateY(-4px);
   transform-origin: center top;
-  background-color: rgb(var(--card));
+  background-color: rgb(var(--card)) !important;
   z-index: 20;
   pointer-events: none;
   opacity: 0;
@@ -78,23 +49,6 @@
     transform 120ms ease;
 }
 
-.task-card-buttons {
-  position: absolute;
-  top: 1rem;
-  right: 1rem;
-}
-
-.task-card-disabled-btn {
-  background-color: rgb(var(--red));
-  color: rgb(var(--white));
-}
-
-.task-card-disabled-btn:hover {
-  color: rgba(var(--white),  0.6);
-  background-color: rgba(var(--red), 0.6);
-}
-
-
 /* Animación de entrada del tooltip al pasar el mouse */
 .task-tag-wrapper:hover .task-tag-tooltip,
 .task-tag-wrapper:focus-within .task-tag-tooltip {
@@ -102,19 +56,30 @@
   transform: translateX(-50%) translateY(0);
 }
 
-/* ===== ACCESIBILIDAD: MOVIMIENTO REDUCIDO ===== */
-/* Desactiva transiciones para usuarios con preferencias de movimiento reducido */
-@media (prefers-reduced-motion: reduce) {
-  .task-btn-sm,
-  .task-tag-tooltip {
-    transition: none !important;
-  }
-  @keyframes fadeIn {
-    from {
-      opacity: 1;
-    }
-    to {
-      opacity: 1;
-    }
-  }
+/* ===== BOTONES ===== */
+
+/* Estado hover y activo */
+.app-btn:not(.task-card-remove-btn):hover,
+.app-btn.task-active {
+  background-color: rgb(var(--white));
+  color: rgb(var(--card));
+}
+
+/* Botón de tarjeta para eliminar */
+.task-card-remove-btn {
+  background-color: rgb(var(--red));
+  color: rgb(var(--white));
+  border: none;
+}
+
+.task-card-remove-btn:hover {
+  color: rgba(var(--white), 0.6) !important;
+  background-color: rgba(var(--red), 0.6) !important;
+}
+
+/* Contenedor de botones */
+.task-card-buttons {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
 }

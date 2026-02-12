@@ -57,7 +57,7 @@ Si te interesa aportar, ver un bug o sugerir una mejora:
 ---
 
 ## 👤 Sobre el autor
-Desarrollador **full-stack** con enfoque en frontend.  
+Desarrollador **full-stack**. 
 Trabajo con React y en la creación de experiencias web prácticas, escalables y bien organizadas.
 
 ---

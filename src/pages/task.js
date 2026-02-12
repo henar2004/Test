@@ -110,13 +110,13 @@ function TagList({ tags }) {
             onMouseLeave={() => setHoverIndex(null)}
           >
             {/* Tag truncado */}
-            <div className="task-btn-sm fw-semibold app-text-xs task-tag-item">
+            <div className="app-btn fw-semibold app-text-xs task-tag-item">
               {truncated[i].charAt(0).toUpperCase() + truncated[i].slice(1)}
             </div>
 
             {/* Tooltip con tag completo si está truncado */}
             {hoverIndex === i && (
-              <div className="task-btn-sm task-tag-tooltip app-text-xs">
+              <div className="app-btn task-tag-tooltip app-text-xs">
                 {tag}
               </div>
             )}
@@ -126,7 +126,7 @@ function TagList({ tags }) {
         {/* Botón "+X" para expandir si hay tags ocultos */}
         {!expanded && visibleCount < tags.length && (
           <div
-            className="task-btn-sm fw-semibold app-text-xs task-tag-item"
+            className="app-btn fw-semibold app-text-xs task-tag-item"
             onClick={() => setExpanded(true)}
           >
             +{tags.length - visibleCount}
@@ -136,7 +136,7 @@ function TagList({ tags }) {
         {/* Botón "▲" para contraer cuando está expandido */}
         {expanded && (
           <div
-            className="task-btn-sm fw-semibold app-text-xs task-tag-item"
+            className="app-btn fw-semibold app-text-xs task-tag-item"
             onClick={() => setExpanded(false)}
           >
             ▲
@@ -285,13 +285,13 @@ export default function Tareas() {
           {/* Botones para cambiar entre vista lista y tablero */}
           <div className="d-flex gap-2">
             <button
-              className={`app-text-sm fw-semibold task-btn-sm ${view === "list" ? "task-active" : ""}`}
+              className={`app-text-sm fw-semibold app-btn ${view === "list" ? "task-active" : ""}`}
               onClick={() => setView("list")}
             >
               Lista
             </button>
             <button
-              className={`app-text-sm fw-semibold task-btn-sm ${view === "board" ? "task-active" : ""}`}
+              className={`app-text-sm fw-semibold app-btn ${view === "board" ? "task-active" : ""}`}
               onClick={() => setView("board")}
             >
               Tablero
@@ -316,7 +316,7 @@ export default function Tareas() {
                   onChange={(e) => setSearchQuery(e.target.value)}
                 />
                 <button
-                  className="task-btn-sm app-text-sm fw-semibold"
+                  className="app-btn app-text-sm fw-semibold"
                   onClick={() => setSearchQuery("")}
                 >
                   Limpiar
@@ -353,7 +353,7 @@ export default function Tareas() {
 
                 {/* Botón para cambiar dirección de ordenamiento (asc/desc) */}
                 <button
-                  className="task-btn-sm app-text-sm fw-semibold"
+                  className="app-btn app-text-sm fw-semibold"
                   onClick={() =>
                     setSortDir((d) => (d === "asc" ? "desc" : "asc"))
                   }
@@ -370,7 +370,7 @@ export default function Tareas() {
           <div className="d-flex justify-content-between align-items-center">
             {/* Botón para abrir/cerrar panel de filtros */}
             <button
-              className={`app-text-sm fw-semibold task-btn-sm ${tagsOpen ? "task-active" : ""}`}
+              className={`app-text-sm fw-semibold app-btn ${tagsOpen ? "task-active" : ""}`}
               onClick={() => setTagsOpen((open) => !open)}
             >
               Filtrar por tags
@@ -379,13 +379,13 @@ export default function Tareas() {
             {/* Botones para cambiar modo de coincidencia de tags */}
             <div className="d-flex gap-2">
               <button
-                className={`app-text-sm fw-semibold task-btn-sm ${tagMatchMode === "any" ? "task-active" : ""}`}
+                className={`app-text-sm fw-semibold app-btn ${tagMatchMode === "any" ? "task-active" : ""}`}
                 onClick={() => setTagMatchMode("any")}
               >
                 Incluye cualquiera
               </button>
               <button
-                className={`app-text-sm fw-semibold task-btn-sm ${tagMatchMode === "all" ? "task-active" : ""}`}
+                className={`app-text-sm fw-semibold app-btn ${tagMatchMode === "all" ? "task-active" : ""}`}
                 onClick={() => setTagMatchMode("all")}
               >
                 Contiene todos
@@ -400,7 +400,7 @@ export default function Tareas() {
               {allTags.map((tag) => (
                 <button
                   key={tag}
-                  className={`app-text-sm fw-semibold task-btn-sm ${
+                  className={`app-text-sm fw-semibold app-btn ${
                     selectedTags.includes(tag) ? "task-active" : ""
                   }`}
                   onClick={() => toggleTag(tag)}
@@ -411,7 +411,7 @@ export default function Tareas() {
 
               {/* Botón para limpiar todos los filtros */}
               <button
-                className="task-btn-sm fw-semibold app-text-sm"
+                className="app-btn fw-semibold app-text-sm"
                 onClick={clearFilters}
               >
                 Borrar filtros
@@ -443,10 +443,10 @@ export default function Tareas() {
                 >
                   {/* ===== BOTONES FLOTANTES A LA DERECHA ===== */}
                   <div className="d-flex gap-2 task-card-buttons">
-                    <button className="task-btn-sm fw-semibold app-text-sm">
+                    <button className="app-btn fw-semibold app-text-sm">
                       Editar
                     </button>
-                    <button className="task-btn-sm task-card-disabled-btn fw-semibold app-text-sm">
+                    <button className="app-btn task-card-remove-btn fw-semibold app-text-sm">
                       Eliminar
                     </button>
                   </div>

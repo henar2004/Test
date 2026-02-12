@@ -1,8 +1,9 @@
 // ==================
-// Componente: App.js
-// Componente raíz de la aplicación con enrutamiento principal
+// Componente principal: App.js
+// Componente principal de la aplicación con enrutamiento y animaciones de transición entre páginas
 // ==================
 
+// Librerías y hooks
 import {
   BrowserRouter as Router,
   Routes,
@@ -11,6 +12,7 @@ import {
 } from "react-router-dom";
 import { useEffect, useState } from "react";
 
+// Páginas y componentes
 import Portafolio from "./pages/portafolio.js";
 import Tareas from "./pages/task.js";
 import Footer from "./components/footer.js";
@@ -19,14 +21,13 @@ import TopBar from "./components/top-bar.js";
 import Login from "./pages/login-page.js";
 
 // ==================
-// COMPONENTE: AnimatedRoutes
-// Anima la transición entre páginas con fade-in/fade-out
+// Funcion secundaria de enrutamiento y animación
 // ==================
 function AnimatedRoutes() {
   const location = useLocation();
   const [displayLocation, setDisplayLocation] = useState(location);
 
-  // ===== EFECTO: Animación de fade aplicada a #root =====
+  //Animación de fade
   useEffect(() => {
     const root = document.getElementById("root"); // obtenemos el div root
     if (root) root.style.transition = "opacity 0.28s ease-in-out";
@@ -42,22 +43,22 @@ function AnimatedRoutes() {
     }
   }, [location, displayLocation]);
 
-  // Mostrar TopBar solo en Gestor-de-tareas
-  const showMenu =
-    displayLocation.pathname === "/login" ||
-    displayLocation.pathname === "/gestor-de-tareas";
+  // Mostrar TopBar en ciertas rutas, ocultar en otras
+  const showMenu = ["/login", "/gestor-de-tareas"].includes(
+    displayLocation.pathname,
+  );
 
-  // Footer como antes o ajustado según necesites
-  const showFooter =
-    displayLocation.pathname === "*" ||
-    !["/", "/gestor-de-tareas", "/login"].includes(displayLocation.pathname);
+  // Mostrar Footer en ciertas rutas
+  const showFooter = ["/", "/gestor-de-tareas", "/login"].includes(
+    displayLocation.pathname,
+  );
 
   return (
     <>
-      {/* ===== MENU CONDICIONAL ===== */}
+      {/* Si se cumple muestra la TopBar y pasa la ubicación actual al componente */}
       {showMenu && <TopBar location={displayLocation} />}
 
-      {/* ===== CONTENIDO DE LA PÁGINA ===== */}
+      {/* Enrutamiento de páginas */}
       <Routes location={displayLocation} key={displayLocation.pathname}>
         <Route path="/" element={<Portafolio />} />
         <Route path="/gestor-de-tareas" element={<Tareas />} />
@@ -65,29 +66,31 @@ function AnimatedRoutes() {
         <Route path="*" element={<NotFound />} />
       </Routes>
 
-      {/* ===== FOOTER CONDICIONAL ===== */}
-      {!showFooter && <Footer />}
+      {/* Si se cumple muestra el Footer */}
+      {showFooter && <Footer />}
     </>
   );
 }
 
 // ==================
-// COMPONENTE PRINCIPAL: App
+// Funcion principal
 // ==================
 export default function App() {
   useEffect(() => {
-    const link =
-      document.querySelector("link[rel~='icon']") ||
-      document.createElement("link");
+    // Buscar el favicon actual en el documento
+    const link = document.querySelector("link[rel~='icon']");
     link.rel = "icon";
 
+    // Cambia el favicon según el tema del sistema (dark/light)
     const setFavicon = () => {
       const isDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
       link.href = isDark ? "/white-favicon.png" : "/black-favicon.png";
       document.head.appendChild(link);
     };
 
-    setFavicon();
+    setFavicon(); // Establece el favicon al cargar la app
+
+    // Escucha cambios en el tema del sistema y actualiza el favicon
     window
       .matchMedia("(prefers-color-scheme: dark)")
       .addEventListener("change", setFavicon);
