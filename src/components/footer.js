@@ -5,9 +5,9 @@
 
 export default function Footer() {
   return (
-    <footer className="app-page-bg pb-3">
+    <footer className="g__page-bg pb-3">
       <div className="container py-3">
-        <div className="d-flex justify-content-between align-items-center app-text-sm">
+        <div className="d-flex justify-content-between align-items-center g__text--sm">
           {/* Copyright dinámico con año actual */}
           <span>© {new Date().getFullYear()} Henar Garcia</span>
 

@@ -5,13 +5,13 @@
 
 /* ===== SECCIÓN HERO ===== */
 /* Contenedor principal del hero con foto y datos personales */
-.portafolio-hero {
+.p__hero {
   display: flex;
   align-items: center;
 }
 
 /* Foto redonda del hero con borde sutil */
-.portafolio-hero-photo {
+.p__hero-photo {
   width: 120px;
   height: 120px;
   border-radius: 50%;
@@ -19,26 +19,26 @@
 }
 
 /* Rol o profesión debajo del nombre */
-.portafolio-hero-role {
+.p__hero-role {
   color: rgb(var(--grey));
   margin: 0.15rem 0 0.6rem;
 }
 
 /* ===== TIMELINE (EXPERIENCIA LABORAL) ===== */
 /* Contenedor vertical de los items de la línea temporal */
-.portafolio-timeline {
+.p__timeline {
   display: flex;
   flex-direction: column;
 }
 
 /* Cada elemento de la línea temporal con icono y contenido */
-.portafolio-timeline-item {
+.p__timeline-item {
   display: flex;
   align-items: flex-start;
 }
 
 /* Punto circular de la línea temporal en color verde */
-.portafolio-timeline-dot {
+.p__timeline-dot {
   width: 12px;
   height: 12px;
   border-radius: 50%;
@@ -47,13 +47,13 @@
 }
 
 /* Texto secundario con fecha o información adicional */
-.portafolio-timeline-sub {
+.p__timeline-sub {
   color: rgb(var(--grey));
 }
 
 /* ===== SKILLS (HABILIDADES) ===== */
 /* Punto indicador de skill en color verde */
-.portafolio-skill-dot {
+.p__skill-dot {
   display: inline-block;
   width: 10px;
   height: 10px;
@@ -63,7 +63,7 @@
 
 /* ===== BOTONES DE PROYECTOS ===== */
 /* Botón de proyecto con icono, borde sutil y transición suave */
-.portafolio-btn {
+.p__btn {
   display: inline-flex;
   align-items: center;
   border: 1px solid rgba(var(--grey), 0.2);
@@ -73,29 +73,25 @@
   transition: all 0.3s ease;
 }
 
-.portafolio-card-list {
-margin-bottom: -1rem;
-}
-
 /* Efecto hover: fondo blanco y texto oscuro (solo si no está deshabilitado) */
-.portafolio-btn:not(.portafolio-disabled-btn):hover {
+.p__btn:not(.p__disabled-btn):hover {
   background-color: rgb(var(--white));
   color: rgb(var(--card)) !important;
 }
 
 /* Efecto hover en icono: cambia a negro para mejor contraste */
-.portafolio-btn:not(.portafolio-disabled-btn):hover img {
+.p__btn:not(.p__disabled-btn):hover img {
   filter: brightness(0) saturate(100%);
 }
 
 /* Transición suave del icono dentro del botón */
-.portafolio-btn img {
+.p__btn img {
   transition: filter 0.3s ease;
 }
 
 /* ===== ESTADOS ESPECIALES ===== */
 /* Botón deshabilitado (proyecto no disponible) con fondo rojo */
-.portafolio-disabled-btn {
+.p__disabled-btn {
   background-color: rgb(var(--red));
   color: rgb(var(--white));
   cursor: not-allowed;

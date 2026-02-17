@@ -4,9 +4,8 @@
 // ==================
 
 import miFoto from "../images/mi-cara.png";
-import "../styles/portafolio.css";
-import { Link } from "react-router-dom";
 import webIcon from "../images/link.png";
+import { Link } from "react-router-dom";
 
 // ==================
 // DATOS: Habilidades
@@ -119,21 +118,21 @@ export default function Portafolio() {
   // Estructura principal del componente Portafolio
   // ==================
   return (
-    <main className="app-page-bg app-page-fill">
-      <div className="container app-container">
+    <main className="g__page-bg g__page-fill">
+      <div className="container">
         {/* HERO / INICIO */}
-        <header id="inicio" className="portafolio-hero gap-3 mb-5">
+        <header id="inicio" className="p__hero gap-3 mb-5">
           <img
             src={miFoto}
             alt="Henar Garcia Boada"
-            className="portafolio-hero-photo"
+            className="p__hero-photo"
           />
           <div>
-            <h1 className="app-text-xl m-0">Henar Garcia Boada</h1>
-            <p className="fw-semibold app-text-md portafolio-hero-role">
+            <h1 className="g__text--xl m-0">Henar Garcia Boada</h1>
+            <p className="fw-semibold g__text--md p__hero-role">
               Desarrollador Web · Tecnología & Programación
             </p>
-            <p className="m-0 app-text-md">
+            <p className="m-0 g__text--md">
               Soy una persona optimista, entusiasta y persistente, con pasión
               por la tecnología y la programación. Me especializo en desarrollo
               Fullstack, trabajando tanto en frontend como backend con múltiples
@@ -144,29 +143,29 @@ export default function Portafolio() {
         </header>
 
         {/* HABILIDADES / ATRIBUTOS */}
-        <h5 className="fw-semibold app-text-lg mb-3">
+        <h5 className="fw-semibold g__text--lg mb-3">
           Habilidades & Tecnologías
         </h5>
-        <section className="app-card p-4 mb-4 rounded">
+        <section className="g__card p-4 mb-4 rounded">
           <div className="row g-3">
             {skills.map((skill, i) => (
               <div key={i} className="col-6 col-md-2 d-flex align-items-center">
-                <span className="portafolio-skill-dot me-2" />
-                <span className="app-text-md">{skill}</span>
+                <span className="p__skill-dot me-2" />
+                <span className="g__text--md">{skill}</span>
               </div>
             ))}
           </div>
         </section>
 
         {/* PROYECTOS */}
-        <h5 className="fw-semibold app-text-lg mb-3">Proyectos</h5>
+        <h5 className="fw-semibold g__text--lg mb-3">Proyectos</h5>
         <section className="mb-4">
           <div className="row g-4">
             {proyectos.map((proyecto, index) => (
               <div className="col-md-4" key={index}>
-                <div className="app-card p-4 rounded h-100 d-flex flex-column justify-content-between position-relative">
+                <div className="g__card p-4 rounded h-100 d-flex flex-column justify-content-between position-relative">
                   <div>
-                    <h6 className="fw-semibold app-text-md">
+                    <h6 className="fw-semibold g__text--md">
                       {proyecto.titulo}
                     </h6>
                     <p className="mb-0">{proyecto.descripcion}</p>
@@ -176,14 +175,14 @@ export default function Portafolio() {
                     {proyecto.enlace !== "#" ? (
                       <Link
                         to={proyecto.enlace}
-                        className="portafolio-btn app-text-md fw-semibold d-flex align-items-center gap-2"
+                        className="p__btn g__text--md fw-semibold d-flex align-items-center gap-2"
                       >
                         <img src={webIcon} alt="Web" width={18} height={18} />
                         Abrir
                       </Link>
                     ) : (
                       <button
-                        className="portafolio-btn app-text-md fw-semibold d-flex align-items-center gap-2 portafolio-disabled-btn"
+                        className="p__btn g__text--md fw-semibold d-flex align-items-center gap-2 p__disabled-btn"
                         disabled
                       >
                         <img src={webIcon} alt="Web" width={18} height={18} />
@@ -198,18 +197,18 @@ export default function Portafolio() {
         </section>
 
         {/* EXPERIENCIA LABORAL */}
-        <h5 className="fw-semibold app-text-lg mb-3">Experiencia Laboral</h5>
-        <section className="app-card p-4 mb-4 rounded">
-          <div className="portafolio-timeline gap-3">
+        <h5 className="fw-semibold g__text--lg mb-3">Experiencia Laboral</h5>
+        <section className="g__card p-4 mb-4 rounded">
+          <div className="p__timeline gap-3">
             {experiencias.map((exp, i) => (
               <div key={i} className="d-flex gap-3 align-items-start">
                 {/* Dot */}
-                <div className="portafolio-timeline-dot mt-1" />
+                <div className="p__timeline-dot mt-1" />
 
                 {/* Contenido: title arriba, period+desc debajo */}
                 <div className="d-flex flex-column">
-                  <h6 className="fw-semibold app-text-md mb-1">{exp.title}</h6>
-                  <div className="portafolio-timeline-sub app-text-md">
+                  <h6 className="fw-semibold g__text--md mb-1">{exp.title}</h6>
+                  <div className="p__timeline-sub g__text--md">
                     {exp.period} · {exp.desc}
                   </div>
                 </div>
@@ -219,13 +218,13 @@ export default function Portafolio() {
         </section>
 
         {/* ESTUDIOS */}
-        <h5 className="fw-semibold app-text-lg mb-3">Estudios</h5>
+        <h5 className="fw-semibold g__text--lg mb-3">Estudios</h5>
         <section className="row g-4 mb-4">
           {estudios.map((edu, i) => (
             <div key={i} className="col-md-6">
-              <div className="app-card p-3 rounded d-flex flex-column justify-content-center">
-                <div className="fw-semibold app-text-md mb-1">{edu.title}</div>
-                <div className="portafolio-timeline-sub app-text-md">
+              <div className="g__card p-3 rounded d-flex flex-column justify-content-center">
+                <div className="fw-semibold g__text--md mb-1">{edu.title}</div>
+                <div className="p__timeline-sub g__text--md">
                   {edu.period}
                 </div>
               </div>

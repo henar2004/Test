@@ -1,5 +1,5 @@
 /* =========================
-   Estilos: App.css
+   Estilos: global.css
    Estilos globales para toda la aplicación
    ========================= */
 
@@ -14,25 +14,25 @@
 }
 
 /* ===== TIPOGRAFÍA ===== */
-.app-text-xs {
+.g__text--xs {
   font-size: clamp(0.7rem, 1vw, 0.75rem) !important;
 } /* Extra pequeño: etiquetas y badges */
-.app-text-sm {
+.g__text--sm {
   font-size: clamp(0.75rem, 1.2vw, 0.875rem) !important;
 } /* Pequeño: texto secundario, botones */
-.app-text-md {
+.g__text--md {
   font-size: clamp(0.9rem, 1.5vw, 1rem) !important;
 } /* Mediano: párrafos */
-.app-text-lg {
+.g__text--lg {
   font-size: clamp(1.1rem, 2vw, 1.25rem) !important;
 } /* Grande: subtítulos */
-.app-text-xl {
+.g__text--xl {
   font-size: clamp(1.3rem, 2.5vw, 1.5rem) !important;
 } /* Extra grande: títulos de sección */
-.app-text-xxl {
+.g__text--xxl {
   font-size: clamp(1.75rem, 3vw, 2rem) !important;
 } /* Muy grande: títulos principales */
-.app-text-xxxl {
+.g__text--xxxl {
   font-size: clamp(2rem, 4vw, 2.5rem) !important;
 } /* Encabezado principal */
 
@@ -61,27 +61,38 @@ main {
 
 /* ===== CONTENEDORES Y COMPONENTES ===== */
 /* Fondo y color de texto principal */
-.app-page-bg {
+.g__page-bg {
   background-color: rgb(var(--bg));
   color: rgb(var(--white));
 }
 
 /* Padding superior e inferior del main */
-.app-page-fill {
+.g__page-fill {
   padding-top: 3rem;
   padding-bottom: 2rem;
 }
 
-/* Contenedor centrado y ancho máximo */
-.app-container {
-  max-width: 920px;
-  margin: 0 auto;
-  padding: 0;
+/* Fondo oscuro para todas las tarjetas */
+.g__card {
+  background-color: rgb(var(--card));
 }
 
-/* Fondo oscuro para todas las tarjetas */
-.app-card {
-  background-color: rgb(var(--card));
+/* ===== ESTILOS DE BOTONES ===== */
+/* Boton general */
+.g__btn {
+  display: inline-flex;
+  align-items: center;
+  border: 1px solid rgba(var(--grey), 0.2);
+  padding: 0.35rem 0.7rem;
+  border-radius: 6px;
+  background: transparent;
+  color: rgb(var(--white));
+  transition: all 0.3s ease;
+}
+
+.g__btn:not(.g__btn-not-hover):hover {
+  background-color: rgb(var(--white)) !important;
+  color: rgb(var(--card)) !important;
 }
 
 /* ===== ESTILOS DE ENLACES ===== */
@@ -94,24 +105,6 @@ a {
 /* Hover de enlaces: gris */
 a:hover {
   color: rgb(var(--grey)) !important;
-}
-
-/* ===== ESTILOS DE BOTONES ===== */
-/* Boton general */
-.app-btn {
-  display: inline-flex;
-  align-items: center;
-  border: 1px solid rgba(var(--grey), 0.2);
-  padding: 0.35rem 0.7rem;
-  border-radius: 6px;
-  background: transparent;
-  color: rgb(var(--white));
-  transition: all 0.3s ease;
-}
-
-.app-btn:hover {
-  background-color: rgb(var(--white)) !important;
-  color: rgb(var(--card)) !important;
 }
 
 /* ===== AJUSTES BOOTSRAP ===== */

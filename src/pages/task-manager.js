@@ -3,19 +3,7 @@
 // Página de gestor de tareas
 // ==================
 
-import React, {
-  useMemo,
-  useState,
-  useRef,
-  useLayoutEffect,
-  useCallback,
-} from "react";
-import "../styles/task.css";
-import { useEffect } from "react";
-
-// ==================
-// DATOS ESTÁTICOS
-// ==================
+import { useState, useEffect, useMemo, useRef, useLayoutEffect, useCallback } from "react";
 
 // ==================
 // COMPONENTE: TagList
@@ -105,18 +93,18 @@ function TagList({ tags }) {
         {tags.slice(0, visibleCount).map((tag, i) => (
           <div
             key={tag + i}
-            className="task-tag-wrapper"
+            className="tm__tag-wrapper"
             onMouseEnter={() => setHoverIndex(i)}
             onMouseLeave={() => setHoverIndex(null)}
           >
             {/* Tag truncado */}
-            <div className="app-btn fw-semibold app-text-xs task-tag-item">
+            <div className="g__btn fw-semibold g__text--xs tm__tag-item">
               {truncated[i].charAt(0).toUpperCase() + truncated[i].slice(1)}
             </div>
 
             {/* Tooltip con tag completo si está truncado */}
             {hoverIndex === i && (
-              <div className="app-btn task-tag-tooltip app-text-xs">
+              <div className="g__btn tm__tag-tooltip g__text--xs">
                 {tag}
               </div>
             )}
@@ -126,7 +114,7 @@ function TagList({ tags }) {
         {/* Botón "+X" para expandir si hay tags ocultos */}
         {!expanded && visibleCount < tags.length && (
           <div
-            className="app-btn fw-semibold app-text-xs task-tag-item"
+            className="g__btn fw-semibold g__text--xs tm__tag-item"
             onClick={() => setExpanded(true)}
           >
             +{tags.length - visibleCount}
@@ -136,7 +124,7 @@ function TagList({ tags }) {
         {/* Botón "▲" para contraer cuando está expandido */}
         {expanded && (
           <div
-            className="app-btn fw-semibold app-text-xs task-tag-item"
+            className="g__btn fw-semibold g__text--xs tm__tag-item"
             onClick={() => setExpanded(false)}
           >
             ▲
@@ -278,20 +266,20 @@ export default function Tareas() {
   // RENDER
   // ==================
   return (
-    <main className="app-page-bg app-page-fill">
-      <div className="container app-container">
+    <main className="g__page-bg g__page-fill">
+      <div className="container">
         {/* ===== ENCABEZADO CON TÍTULO Y BOTONES DE VISTA ===== */}
-        <div className="d-inline-flex justify-content-between align-items-center p-3 app-card portafolio-card-list rounded">
+        <div className="d-inline-flex justify-content-between align-items-center p-3 g__card tm__button-list rounded">
           {/* Botones para cambiar entre vista lista y tablero */}
           <div className="d-flex gap-2">
             <button
-              className={`app-text-sm fw-semibold app-btn ${view === "list" ? "task-active" : ""}`}
+              className={`g__text--sm fw-semibold g__btn tm__btn-hover ${view === "list" ? "tm__btn-active" : ""}`}
               onClick={() => setView("list")}
             >
               Lista
             </button>
             <button
-              className={`app-text-sm fw-semibold app-btn ${view === "board" ? "task-active" : ""}`}
+              className={`g__text--sm fw-semibold g__btn tm__btn-hover ${view === "board" ? "tm__btn-active" : ""}`}
               onClick={() => setView("board")}
             >
               Tablero
@@ -300,13 +288,13 @@ export default function Tareas() {
         </div>
 
         {/* ===== PANEL: BÚSQUEDA Y ORDENAMIENTO ===== */}
-        <div className="app-card p-3 mb-4 rounded">
+        <div className="g__card p-3 mb-4 rounded">
           <div className="row g-3 align-items-center">
             {/* Campo de búsqueda con botón limpiar */}
             <div className="col-md-5">
               <div className="input-group">
                 <input
-                  className="form-control app-text-sm fw-semibold"
+                  className="form-control g__text--sm fw-semibold"
                   placeholder={
                     searchMode === "title"
                       ? "Buscar por título o texto..."
@@ -316,7 +304,7 @@ export default function Tareas() {
                   onChange={(e) => setSearchQuery(e.target.value)}
                 />
                 <button
-                  className="app-btn app-text-sm fw-semibold"
+                  className="g__btn g__text--sm fw-semibold"
                   onClick={() => setSearchQuery("")}
                 >
                   Limpiar
@@ -327,7 +315,7 @@ export default function Tareas() {
             {/* Selector del modo de búsqueda */}
             <div className="col-md-3">
               <select
-                className="form-select app-text-sm fw-semibold"
+                className="form-select g__text--sm fw-semibold"
                 value={searchMode}
                 onChange={(e) => setSearchMode(e.target.value)}
               >
@@ -340,7 +328,7 @@ export default function Tareas() {
             <div className="col-md-4">
               <div className="input-group">
                 <select
-                  className="form-select app-text-sm fw-semibold"
+                  className="form-select g__text--sm fw-semibold"
                   value={sortField}
                   onChange={(e) => setSortField(e.target.value)}
                 >
@@ -353,7 +341,7 @@ export default function Tareas() {
 
                 {/* Botón para cambiar dirección de ordenamiento (asc/desc) */}
                 <button
-                  className="app-btn app-text-sm fw-semibold"
+                  className="g__btn g__text--sm fw-semibold"
                   onClick={() =>
                     setSortDir((d) => (d === "asc" ? "desc" : "asc"))
                   }
@@ -366,11 +354,11 @@ export default function Tareas() {
         </div>
 
         {/* ===== PANEL: FILTROS POR TAGS ===== */}
-        <div className="app-card p-3 mb-4 rounded">
+        <div className="g__card p-3 mb-4 rounded">
           <div className="d-flex justify-content-between align-items-center">
             {/* Botón para abrir/cerrar panel de filtros */}
             <button
-              className={`app-text-sm fw-semibold app-btn ${tagsOpen ? "task-active" : ""}`}
+              className={`g__text--sm fw-semibold g__btn tm__btn-hover ${tagsOpen ? "tm__btn-active" : ""}`}
               onClick={() => setTagsOpen((open) => !open)}
             >
               Filtrar por tags
@@ -379,13 +367,13 @@ export default function Tareas() {
             {/* Botones para cambiar modo de coincidencia de tags */}
             <div className="d-flex gap-2">
               <button
-                className={`app-text-sm fw-semibold app-btn ${tagMatchMode === "any" ? "task-active" : ""}`}
+                className={`g__text--sm fw-semibold g__btn tm__btn-hover ${tagMatchMode === "any" ? "tm__btn-active" : ""}`}
                 onClick={() => setTagMatchMode("any")}
               >
                 Incluye cualquiera
               </button>
               <button
-                className={`app-text-sm fw-semibold app-btn ${tagMatchMode === "all" ? "task-active" : ""}`}
+                className={`g__text--sm fw-semibold g__btn tm__btn-hover ${tagMatchMode === "all" ? "tm__btn-active" : ""}`}
                 onClick={() => setTagMatchMode("all")}
               >
                 Contiene todos
@@ -400,8 +388,8 @@ export default function Tareas() {
               {allTags.map((tag) => (
                 <button
                   key={tag}
-                  className={`app-text-sm fw-semibold app-btn ${
-                    selectedTags.includes(tag) ? "task-active" : ""
+                  className={`g__text--sm fw-semibold g__btn tm__btn-hover ${
+                    selectedTags.includes(tag) ? "tm__btn-active" : ""
                   }`}
                   onClick={() => toggleTag(tag)}
                 >
@@ -411,7 +399,7 @@ export default function Tareas() {
 
               {/* Botón para limpiar todos los filtros */}
               <button
-                className="app-btn fw-semibold app-text-sm"
+                className="g__btn fw-semibold g__text--sm"
                 onClick={clearFilters}
               >
                 Borrar filtros
@@ -424,35 +412,35 @@ export default function Tareas() {
         {view === "list" ? (
           <div className="list-group">
             {loading ? (
-              <div className="app-card app-text-md rounded p-3">
+              <div className="g__card g__text--md rounded p-3">
                 Cargando tareas...
               </div>
             ) : tasks.length === 0 ? (
-              <div className="app-card app-text-md rounded p-3">
+              <div className="g__card g__text--md rounded p-3">
                 No hay tareas en la base de datos.
               </div>
             ) : filtered.length === 0 ? (
-              <div className="app-card app-text-md rounded p-3">
+              <div className="g__card g__text--md rounded p-3">
                 No hay tareas que coincidan con los filtros.
               </div>
             ) : (
               filtered.map((task) => (
                 <div
                   key={task.id}
-                  className="app-card rounded p-3 mb-4 position-relative"
+                  className="g__card rounded p-3 mb-4 position-relative"
                 >
                   {/* ===== BOTONES FLOTANTES A LA DERECHA ===== */}
-                  <div className="d-flex gap-2 task-card-buttons">
-                    <button className="app-btn fw-semibold app-text-sm">
+                  <div className="d-flex gap-2 tm__card-buttons">
+                    <button className="g__btn fw-semibold g__text--sm">
                       Editar
                     </button>
-                    <button className="app-btn task-card-remove-btn fw-semibold app-text-sm">
+                    <button className="g__btn tm__card-remove-btn fw-semibold g__text--sm">
                       Eliminar
                     </button>
                   </div>
 
-                  <div className="fw-semibold app-text-md">{task.title}</div>
-                  <div className="app-text-sm task-timeline-sub">
+                  <div className="fw-semibold g__text--md">{task.title}</div>
+                  <div className="g__text--sm tm__timeline-sub">
                     Creado: {task.created} · Modificado: {task.updated}
                   </div>
                   <TagList tags={task.tags} />
@@ -464,31 +452,31 @@ export default function Tareas() {
           <div className="row g-4">
             {loading ? (
               <div className="col-12">
-                <div className="app-card app-text-md rounded p-3">
+                <div className="g__card g__text--md rounded p-3">
                   Cargando tareas...
                 </div>
               </div>
             ) : tasks.length === 0 ? (
               <div className="col-12">
-                <div className="app-card app-text-md rounded p-3">
+                <div className="g__card g__text--md rounded p-3">
                   No hay tareas en la base de datos.
                 </div>
               </div>
             ) : filtered.length === 0 ? (
               <div className="col-12">
-                <div className="app-card app-text-md rounded p-3">
+                <div className="g__card g__text--md rounded p-3">
                   No hay tareas que coincidan con los filtros.
                 </div>
               </div>
             ) : (
               filtered.map((task) => (
                 <div key={task.id} className="col-md-4">
-                  <div className="app-card rounded p-3 d-flex flex-column h-100">
-                    <div className="fw-semibold app-text-md">{task.title}</div>
-                    <div className="app-text-sm task-timeline-sub">
+                  <div className="g__card rounded p-3 d-flex flex-column h-100">
+                    <div className="fw-semibold g__text--md">{task.title}</div>
+                    <div className="g__text--sm tm__timeline-sub">
                       Creado: {task.created} · Modificado: {task.updated}
                     </div>
-                    <div className="app-text-sm task-timeline-sub mt-2 task-two-lines">
+                    <div className="g__text--sm tm__timeline-sub mt-2 tm__two-lines">
                       {task.text}
                     </div>
                     <TagList tags={task.tags} />

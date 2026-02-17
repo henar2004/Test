@@ -1,16 +1,16 @@
 /* =========================
-   Estilos: task.css
-   Estilos específicos para la página de gestión de tareas (Task)
+   Estilos: task-manager.css
+   Estilos específicos para la página de gestión de tareas
    ========================= */
 
 /* ===== TEXTO SECUNDARIO Y TRUNCADO ===== */
 /* Subtítulo con fechas de creación/modificación */
-.task-timeline-sub {
+.tm__timeline-sub {
   color: rgb(var(--grey));
 }
 
 /* Truncado a máximo 2 líneas con ellipsis */
-.task-two-lines {
+.tm__two-lines {
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
@@ -20,21 +20,21 @@
 
 /* ===== TAGS DENTRO DE LAS TARJETAS ===== */
 /* Elemento individual del tag con truncado responsivo */
-.task-tag-item {
+.tm__tag-item {
   white-space: nowrap;
   text-overflow: ellipsis;
   max-width: clamp(80px, 18vw, 120px);
 }
 
 /* Contenedor relativo para posicionar el tooltip */
-.task-tag-wrapper {
+.tm__tag-wrapper {
   position: relative;
   display: inline-block;
   vertical-align: middle;
 }
 
 /* Tooltip que muestra el tag completo al hover */
-.task-tag-tooltip {
+.tm__tag-tooltip {
   position: absolute;
   top: calc(100% + 6px);
   left: 50%;
@@ -50,35 +50,39 @@
 }
 
 /* Animación de entrada del tooltip al pasar el mouse */
-.task-tag-wrapper:hover .task-tag-tooltip,
-.task-tag-wrapper:focus-within .task-tag-tooltip {
+.tm__tag-wrapper:hover .tm__tag-tooltip,
+.tm__tag-wrapper:focus-within .tm__tag-tooltip {
   opacity: 1;
   transform: translateX(-50%) translateY(0);
 }
 
 /* ===== BOTONES ===== */
 
+.tm__button-list {
+margin-bottom: -1rem;
+}
+
 /* Estado hover y activo */
-.app-btn:not(.task-card-remove-btn):hover,
-.app-btn.task-active {
+.tm__btn-hover:not(.tm__card-remove-btn):hover,
+.tm__btn-hover.tm__btn-active {
   background-color: rgb(var(--white));
   color: rgb(var(--card));
 }
 
 /* Botón de tarjeta para eliminar */
-.task-card-remove-btn {
+.tm__card-remove-btn {
   background-color: rgb(var(--red));
   color: rgb(var(--white));
   border: none;
 }
 
-.task-card-remove-btn:hover {
+.tm__card-remove-btn:hover {
   color: rgba(var(--white), 0.6) !important;
   background-color: rgba(var(--red), 0.6) !important;
 }
 
 /* Contenedor de botones */
-.task-card-buttons {
+.tm__card-buttons {
   position: absolute;
   top: 1rem;
   right: 1rem;

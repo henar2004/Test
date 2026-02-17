@@ -12,13 +12,19 @@ import {
 } from "react-router-dom";
 import { useEffect, useState } from "react";
 
+import "bootstrap/dist/css/bootstrap.min.css"; // Estilos de Bootstrap
+import "./styles/global.css"; // Estilos globales de la app
+import "./styles/task-manager.css";
+import "./styles/portafolio.css";
+import "./styles/page-not-found.css";
+
 // Páginas y componentes
 import Portafolio from "./pages/portafolio.js";
-import Tareas from "./pages/task.js";
+import Tareas from "./pages/task-manager.js";
 import Footer from "./components/footer.js";
-import NotFound from "./pages/not-found.js";
-import TopBar from "./components/top-bar.js";
-import Login from "./pages/login-page.js";
+import NotFound from "./pages/page-not-found.js";
+import TopBar from "./components/navbar.js";
+import Login from "./pages/auth.js";
 
 // ==================
 // Funcion secundaria de enrutamiento y animación
