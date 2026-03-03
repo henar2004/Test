@@ -1,16 +1,24 @@
-// ==================
-// Componente raíz: index.js
-// Punto de entrada para monta la app en el div cona la id "root" dentro de index.html
-// ==================
+/* =========================================
+   Archivo: index.js
+   Tipo: JS
+   Descripción: Punto de entrada de la aplicación; monta el componente raíz en el div con id "root" del index.html
+   ========================================= */
 
+/* ====== IMPORTS ======
+   Importaciones de librerías, hooks, componentes y recursos */
 import React from "react"; // Librería React para JSX
-import ReactDOM from "react-dom/client"; // Permite renderizar React en el DOM
+import ReactDOM from "react-dom/client"; // Renderiza React en el DOM
 import "./index.css"; // Estilos globales
-import App from "./App.js"; // Componente principal de la app
+import App from "./App.js"; // Componente principal de la aplicación
 
-const root = ReactDOM.createRoot(document.getElementById("root")); // Crea el contenedor React
+/* ====== CONSTANTES / DATOS ======
+   Datos estáticos, arrays de opciones, configuraciones internas */
+const root = ReactDOM.createRoot(document.getElementById("root"));
+
+/* ====== RENDER / JSX ======
+   Estructura principal del componente, return con JSX */
 root.render(
   <React.StrictMode>
     <App />
-  </React.StrictMode>
+  </React.StrictMode>,
 );

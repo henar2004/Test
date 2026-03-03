@@ -1,9 +1,11 @@
-// ==================
-// Componente principal: App.js
-// Componente principal de la aplicación con enrutamiento y animaciones de transición entre páginas
-// ==================
+/* =========================================
+   Archivo: App.js
+   Tipo: Componente Root
+   Descripción: Componente principal de la aplicación con enrutamiento y animaciones de transición entre páginas
+   ========================================= */
 
-// Librerías y hooks
+/* ====== IMPORTS ======
+   Importaciones de librerías, hooks, componentes y recursos */
 import {
   BrowserRouter as Router,
   Routes,
@@ -17,18 +19,19 @@ import "./styles/global.css"; // Estilos globales de la app
 import "./styles/task-manager.css";
 import "./styles/portafolio.css";
 import "./styles/page-not-found.css";
+import "./styles/community-score.css";
 
 // Páginas y componentes
 import Portafolio from "./pages/portafolio.js";
-import Tareas from "./pages/task-manager.js";
+import TaskManager from "./pages/task-manager.js";
 import Footer from "./components/footer.js";
-import NotFound from "./pages/page-not-found.js";
-import TopBar from "./components/navbar.js";
-import Login from "./pages/auth.js";
+import PageNotFound from "./pages/page-not-found.js";
+import NavBar from "./components/navbar.js";
+import Auth from "./pages/auth.js";
+import CommunityScore from "./pages/community-score.js";
 
-// ==================
-// Funcion secundaria de enrutamiento y animación
-// ==================
+/* ====== CONSTANTES / DATOS ======
+   Datos estáticos, arrays de opciones, configuraciones internas */
 function AnimatedRoutes() {
   const location = useLocation();
   const [displayLocation, setDisplayLocation] = useState(location);
@@ -49,27 +52,28 @@ function AnimatedRoutes() {
     }
   }, [location, displayLocation]);
 
-  // Mostrar TopBar en ciertas rutas, ocultar en otras
-  const showMenu = ["/login", "/gestor-de-tareas"].includes(
+  // Mostrar NavBar en ciertas rutas, ocultar en otras
+  const showMenu = ["/auth", "/gestor-de-tareas", "/community-score"].includes(
     displayLocation.pathname,
   );
 
   // Mostrar Footer en ciertas rutas
-  const showFooter = ["/", "/gestor-de-tareas", "/login"].includes(
+  const showFooter = ["/", "/gestor-de-tareas", "/auth", "/community-score"].includes(
     displayLocation.pathname,
   );
 
   return (
     <>
-      {/* Si se cumple muestra la TopBar y pasa la ubicación actual al componente */}
-      {showMenu && <TopBar location={displayLocation} />}
+      {/* Si se cumple muestra la NavBar y pasa la ubicación actual al componente */}
+      {showMenu && <NavBar location={displayLocation} />}
 
       {/* Enrutamiento de páginas */}
       <Routes location={displayLocation} key={displayLocation.pathname}>
         <Route path="/" element={<Portafolio />} />
-        <Route path="/gestor-de-tareas" element={<Tareas />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="*" element={<NotFound />} />
+        <Route path="/gestor-de-tareas" element={<TaskManager />} />
+        <Route path="/auth" element={<Auth />} />
+        <Route path="/community-score" element={<CommunityScore />} />
+        <Route path="*" element={<PageNotFound />} />
       </Routes>
 
       {/* Si se cumple muestra el Footer */}
@@ -78,9 +82,8 @@ function AnimatedRoutes() {
   );
 }
 
-// ==================
-// Funcion principal
-// ==================
+/* ====== RENDER / JSX ======
+   Estructura principal del componente, return con JSX */
 export default function App() {
   useEffect(() => {
     // Buscar el favicon actual en el documento

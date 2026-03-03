@@ -1,37 +1,51 @@
-// ==================
-// Pagina: Task.js
-// Página de gestor de tareas
-// ==================
+/* =========================================
+   Archivo: Task.js
+   Tipo: Página
+   Descripción: Página de gestor de tareas con búsqueda, filtros, ordenamiento y vista en lista/tablero. Contiene el subcomponente TagList para renderizado responsivo de tags.
+   ========================================= */
 
-import { useState, useEffect, useMemo, useRef, useLayoutEffect, useCallback } from "react";
+/* ====== IMPORTS ======
+   Importaciones de librerías, hooks, componentes y recursos */
+import {
+  useState,
+  useEffect,
+  useMemo,
+  useRef,
+  useLayoutEffect,
+  useCallback,
+} from "react";
 
-// ==================
-// COMPONENTE: TagList
-// Renderiza tags con truncado responsivo y tooltip al hover
-// ==================
+/* ====== CONSTANTES / DATOS ======
+   Datos estáticos, arrays de opciones, configuraciones internas */
+const DEFAULT_SORT_FIELD = "created";
+const DEFAULT_SORT_DIR = "desc";
+const MEASURE_GAP = 6; // espacio extra por tag al medir
+
+/* ====== FUNCIONES / MÉTODOS ======
+   Funciones auxiliares, handlers y callbacks */
 function TagList({ tags }) {
-  // Referencias a elementos del DOM
+  // Referencias DOM para medir texto y contener tags visibles
   const containerRef = useRef(null);
   const measurerRef = useRef(null);
 
-  // Estados locales del componente
+  // Estados locales
   const [visibleCount, setVisibleCount] = useState(tags.length);
   const [expanded, setExpanded] = useState(false);
   const [hoverIndex, setHoverIndex] = useState(null);
 
-  // Trunca un tag a X caracteres máximo
+  // Trunca un tag a máximo `max` caracteres
   const truncate = useCallback(
     (t, max = 10) => (t.length > max ? t.slice(0, max) + "..." : t),
     [],
   );
 
-  // Genera array de tags truncados
+  // Array de tags truncados para render
   const truncated = useMemo(
     () => tags.map((t) => truncate(t)),
     [tags, truncate],
   );
 
-  // Calcula cuántos tags caben en el contenedor según su ancho
+  // Mide y calcula cuántos tags caben en el contenedor visible
   const measure = useCallback(() => {
     if (expanded) {
       setVisibleCount(tags.length);
@@ -42,7 +56,7 @@ function TagList({ tags }) {
     if (!cont || !m) return;
 
     const plusText = `+${tags.length}`;
-    const gap = 6;
+    const gap = MEASURE_GAP;
     let used = 0;
     let lastVisible = -1;
     const contW = cont.offsetWidth;
@@ -59,10 +73,11 @@ function TagList({ tags }) {
       } else break;
     }
 
+    // Si no cabe nada, al menos mostrar 0 (el botón +X aparecerá)
     setVisibleCount(lastVisible + 1);
   }, [tags.length, truncated, expanded]);
 
-  // ResizeObserver: recalcula tags visibles cuando cambia el tamaño del contenedor
+  // Observador de resize y efecto inicial
   useLayoutEffect(() => {
     measure();
     const ro = new ResizeObserver(measure);
@@ -76,7 +91,7 @@ function TagList({ tags }) {
 
   return (
     <>
-      {/* Elemento invisible para medir ancho de texto */}
+      {/* Elemento invisible para mediciones de texto */}
       <div
         ref={measurerRef}
         style={{
@@ -87,9 +102,8 @@ function TagList({ tags }) {
         }}
       />
 
-      {/* Contenedor visible de tags */}
+      {/* Contenedor de tags visibles */}
       <div ref={containerRef} className="d-flex gap-2 flex-wrap mt-2">
-        {/* Mapea y renderiza tags visibles con tooltip al hover */}
         {tags.slice(0, visibleCount).map((tag, i) => (
           <div
             key={tag + i}
@@ -98,13 +112,13 @@ function TagList({ tags }) {
             onMouseLeave={() => setHoverIndex(null)}
           >
             {/* Tag truncado */}
-            <div className="g__btn fw-semibold g__text--xs tm__tag-item">
+            <div className="g__btn g__btn--hover g__text--xs tm__tag-item fw-semibold">
               {truncated[i].charAt(0).toUpperCase() + truncated[i].slice(1)}
             </div>
 
             {/* Tooltip con tag completo si está truncado */}
             {hoverIndex === i && (
-              <div className="g__btn tm__tag-tooltip g__text--xs">
+              <div className="g__btn g__btn--hover g__text--xs tm__tag-tooltip">
                 {tag}
               </div>
             )}
@@ -114,7 +128,7 @@ function TagList({ tags }) {
         {/* Botón "+X" para expandir si hay tags ocultos */}
         {!expanded && visibleCount < tags.length && (
           <div
-            className="g__btn fw-semibold g__text--xs tm__tag-item"
+            className="g__btn g__btn--hover g__text--xs tm__tag-item fw-semibold"
             onClick={() => setExpanded(true)}
           >
             +{tags.length - visibleCount}
@@ -124,7 +138,7 @@ function TagList({ tags }) {
         {/* Botón "▲" para contraer cuando está expandido */}
         {expanded && (
           <div
-            className="g__btn fw-semibold g__text--xs tm__tag-item"
+            className="g__btn g__btn--hover g__text--xs tm__tag-item fw-semibold"
             onClick={() => setExpanded(false)}
           >
             ▲
@@ -135,15 +149,25 @@ function TagList({ tags }) {
   );
 }
 
-// ==================
-// COMPONENTE PRINCIPAL: Tareas
-// Gestor de tareas completo con búsqueda, filtros y dos vistas
-// ==================
+/* ====== HOOKS ======
+   Estado y efectos del componente usando useState, useEffect, useRef, etc. */
 export default function Tareas() {
-  const [tasks, setTasks] = useState([]); // reemplaza SAMPLE_TASKS
+  // Datos y UI
+  const [tasks, setTasks] = useState([]);
   const [allTags, setAllTags] = useState([]);
   const [loading, setLoading] = useState(true);
 
+  // Vista, búsqueda, filtros y orden
+  const [view, setView] = useState("list"); // "list" | "board"
+  const [searchQuery, setSearchQuery] = useState("");
+  const [searchMode, setSearchMode] = useState("title"); // "title" | "tags"
+  const [selectedTags, setSelectedTags] = useState([]);
+  const [tagMatchMode, setTagMatchMode] = useState("any"); // "any" | "all"
+  const [sortField, setSortField] = useState(DEFAULT_SORT_FIELD);
+  const [sortDir, setSortDir] = useState(DEFAULT_SORT_DIR);
+  const [tagsOpen, setTagsOpen] = useState(false);
+
+  // Fetch de tareas con AbortController para limpiar en unmount
   useEffect(() => {
     fetch("/api/db")
       .then((res) => res.json())
@@ -158,28 +182,8 @@ export default function Tareas() {
       });
   }, []);
 
-  // ===== ESTADO DE VISTA =====
-  const [view, setView] = useState("list"); // "list" o "board"
-
-  // ===== ESTADO DE BÚSQUEDA =====
-  const [searchQuery, setSearchQuery] = useState(""); // Texto de búsqueda
-  const [searchMode, setSearchMode] = useState("title"); // "title" o "tags"
-
-  // ===== ESTADO DE FILTROS =====
-  const [selectedTags, setSelectedTags] = useState([]); // Tags seleccionados
-  const [tagMatchMode, setTagMatchMode] = useState("any"); // "any" o "all"
-
-  // ===== ESTADO DE ORDENAMIENTO =====
-  const [sortField, setSortField] = useState("created"); // Campo a ordenar
-  const [sortDir, setSortDir] = useState("desc"); // "asc" o "desc"
-
-  // ===== ESTADO DE UI =====
-  const [tagsOpen, setTagsOpen] = useState(false); // Panel de filtros abierto/cerrado
-
-  // ==================
-  // FUNCIONES: Acciones de estado
-  // ==================
-  // Toggle: añade o quita un tag de los filtros seleccionados
+  /* ====== FUNCIONES / MÉTODOS ======
+     Funciones auxiliares, handlers y callbacks */
   const toggleTag = useCallback((tag) => {
     setSelectedTags((prev) =>
       prev.includes(tag) ? prev.filter((t) => t !== tag) : [...prev, tag],
@@ -194,15 +198,12 @@ export default function Tareas() {
     setTagMatchMode("any");
   }, []);
 
-  // ==================
-  // LÓGICA: Filtrado y ordenamiento de tareas
-  // ==================
+  // Lógica de filtrado y ordenamiento de tareas
   const filtered = useMemo(() => {
     const q = searchQuery.trim().toLowerCase();
 
-    // Filtra tareas por búsqueda y tags seleccionados
     const res = tasks.filter((task) => {
-      // ===== FILTRO DE BÚSQUEDA =====
+      // Búsqueda por título/texto o por tags
       if (q) {
         if (searchMode === "title") {
           // Busca en título y descripción
@@ -212,12 +213,11 @@ export default function Tareas() {
           )
             return false;
         } else {
-          // Busca en tags
           if (!task.tags.some((t) => t.toLowerCase().includes(q))) return false;
         }
       }
 
-      // ===== FILTRO DE TAGS =====
+      // Filtro por tags seleccionados
       if (selectedTags.length > 0) {
         if (tagMatchMode === "all") {
           // Modo "contiene todos": debe tener TODOS los tags seleccionados
@@ -233,7 +233,7 @@ export default function Tareas() {
       return true;
     });
 
-    // ===== ORDENAMIENTO =====
+    // Ordenamiento estable
     const sorted = res.sort((a, b) => {
       let va = a[sortField];
       let vb = b[sortField];
@@ -262,24 +262,23 @@ export default function Tareas() {
     tasks,
   ]);
 
-  // ==================
-  // RENDER
-  // ==================
+  /* ====== RENDER / JSX ======
+     Estructura principal del componente, return con JSX */
   return (
     <main className="g__page-bg g__page-fill">
       <div className="container">
-        {/* ===== ENCABEZADO CON TÍTULO Y BOTONES DE VISTA ===== */}
-        <div className="d-inline-flex justify-content-between align-items-center p-3 g__card tm__button-list rounded">
+        {/* ENCABEZADO / CAMBIO DE VISTA */}
+        <div className="g__card tm__button-list d-inline-flex justify-content-between align-items-center p-3 rounded">
           {/* Botones para cambiar entre vista lista y tablero */}
           <div className="d-flex gap-2">
             <button
-              className={`g__text--sm fw-semibold g__btn tm__btn-hover ${view === "list" ? "tm__btn-active" : ""}`}
+              className={`g__btn g__btn--hover g__text--sm tm__btn--hover fw-semibold  ${view === "list" ? "tm__btn--active" : ""}`}
               onClick={() => setView("list")}
             >
               Lista
             </button>
             <button
-              className={`g__text--sm fw-semibold g__btn tm__btn-hover ${view === "board" ? "tm__btn-active" : ""}`}
+              className={`g__btn g__text--sm tm__btn--hover fw-semibold ${view === "board" ? "tm__btn--active" : ""}`}
               onClick={() => setView("board")}
             >
               Tablero
@@ -287,14 +286,14 @@ export default function Tareas() {
           </div>
         </div>
 
-        {/* ===== PANEL: BÚSQUEDA Y ORDENAMIENTO ===== */}
+        {/* BÚSQUEDA / ORDENAMIENTO */}
         <div className="g__card p-3 mb-4 rounded">
           <div className="row g-3 align-items-center">
             {/* Campo de búsqueda con botón limpiar */}
             <div className="col-md-5">
               <div className="input-group">
                 <input
-                  className="form-control g__text--sm fw-semibold"
+                  className=" g__text--sm fw-semibold form-control"
                   placeholder={
                     searchMode === "title"
                       ? "Buscar por título o texto..."
@@ -304,7 +303,7 @@ export default function Tareas() {
                   onChange={(e) => setSearchQuery(e.target.value)}
                 />
                 <button
-                  className="g__btn g__text--sm fw-semibold"
+                  className="g__btn g__btn--hover g__text--sm fw-semibold"
                   onClick={() => setSearchQuery("")}
                 >
                   Limpiar
@@ -315,7 +314,7 @@ export default function Tareas() {
             {/* Selector del modo de búsqueda */}
             <div className="col-md-3">
               <select
-                className="form-select g__text--sm fw-semibold"
+                className="g__text--sm fw-semibold form-select"
                 value={searchMode}
                 onChange={(e) => setSearchMode(e.target.value)}
               >
@@ -328,7 +327,7 @@ export default function Tareas() {
             <div className="col-md-4">
               <div className="input-group">
                 <select
-                  className="form-select g__text--sm fw-semibold"
+                  className="g__text--sm fw-semibold form-select"
                   value={sortField}
                   onChange={(e) => setSortField(e.target.value)}
                 >
@@ -341,7 +340,7 @@ export default function Tareas() {
 
                 {/* Botón para cambiar dirección de ordenamiento (asc/desc) */}
                 <button
-                  className="g__btn g__text--sm fw-semibold"
+                  className="g__btn g__btn--hover g__text--sm fw-semibold"
                   onClick={() =>
                     setSortDir((d) => (d === "asc" ? "desc" : "asc"))
                   }
@@ -353,12 +352,12 @@ export default function Tareas() {
           </div>
         </div>
 
-        {/* ===== PANEL: FILTROS POR TAGS ===== */}
+        {/* FILTROS / TAGS */}
         <div className="g__card p-3 mb-4 rounded">
           <div className="d-flex justify-content-between align-items-center">
             {/* Botón para abrir/cerrar panel de filtros */}
             <button
-              className={`g__text--sm fw-semibold g__btn tm__btn-hover ${tagsOpen ? "tm__btn-active" : ""}`}
+              className={`g__text--sm g__btn tm__btn--hover fw-semibold ${tagsOpen ? "tm__btn--active" : ""}`}
               onClick={() => setTagsOpen((open) => !open)}
             >
               Filtrar por tags
@@ -367,13 +366,13 @@ export default function Tareas() {
             {/* Botones para cambiar modo de coincidencia de tags */}
             <div className="d-flex gap-2">
               <button
-                className={`g__text--sm fw-semibold g__btn tm__btn-hover ${tagMatchMode === "any" ? "tm__btn-active" : ""}`}
+                className={`g__text--sm g__btn tm__btn--hover fw-semibold ${tagMatchMode === "any" ? "tm__btn--active" : ""}`}
                 onClick={() => setTagMatchMode("any")}
               >
                 Incluye cualquiera
               </button>
               <button
-                className={`g__text--sm fw-semibold g__btn tm__btn-hover ${tagMatchMode === "all" ? "tm__btn-active" : ""}`}
+                className={`g__text--sm g__btn tm__btn--hover fw-semibold ${tagMatchMode === "all" ? "tm__btn--active" : ""}`}
                 onClick={() => setTagMatchMode("all")}
               >
                 Contiene todos
@@ -388,8 +387,8 @@ export default function Tareas() {
               {allTags.map((tag) => (
                 <button
                   key={tag}
-                  className={`g__text--sm fw-semibold g__btn tm__btn-hover ${
-                    selectedTags.includes(tag) ? "tm__btn-active" : ""
+                  className={`g__text--sm g__btn tm__btn--hover fw-semibold ${
+                    selectedTags.includes(tag) ? "tm__btn--active" : ""
                   }`}
                   onClick={() => toggleTag(tag)}
                 >
@@ -399,7 +398,7 @@ export default function Tareas() {
 
               {/* Botón para limpiar todos los filtros */}
               <button
-                className="g__btn fw-semibold g__text--sm"
+                className="g__btn g__btn--hover g__text--sm fw-semibold"
                 onClick={clearFilters}
               >
                 Borrar filtros
@@ -408,7 +407,7 @@ export default function Tareas() {
           )}
         </div>
 
-        {/* ===== VISTA: LISTA ===== */}
+        {/* VISTA / LISTA */}
         {view === "list" ? (
           <div className="list-group">
             {loading ? (
@@ -429,17 +428,16 @@ export default function Tareas() {
                   key={task.id}
                   className="g__card rounded p-3 mb-4 position-relative"
                 >
-                  {/* ===== BOTONES FLOTANTES A LA DERECHA ===== */}
-                  <div className="d-flex gap-2 tm__card-buttons">
-                    <button className="g__btn fw-semibold g__text--sm">
+                  <div className="tm__card-buttons d-flex gap-2">
+                    <button className="g__btn g__btn--hover g__text--sm fw-semibold">
                       Editar
                     </button>
-                    <button className="g__btn tm__card-remove-btn fw-semibold g__text--sm">
+                    <button className="g__btn g__text--sm tm__btn--remove fw-semibold">
                       Eliminar
                     </button>
                   </div>
 
-                  <div className="fw-semibold g__text--md">{task.title}</div>
+                  <div className="g__text--md fw-semibold">{task.title}</div>
                   <div className="g__text--sm tm__timeline-sub">
                     Creado: {task.created} · Modificado: {task.updated}
                   </div>
@@ -449,6 +447,7 @@ export default function Tareas() {
             )}
           </div>
         ) : (
+          /* VISTA / TABLERO */
           <div className="row g-4">
             {loading ? (
               <div className="col-12">
@@ -472,7 +471,7 @@ export default function Tareas() {
               filtered.map((task) => (
                 <div key={task.id} className="col-md-4">
                   <div className="g__card rounded p-3 d-flex flex-column h-100">
-                    <div className="fw-semibold g__text--md">{task.title}</div>
+                    <div className="g__text--md fw-semibold">{task.title}</div>
                     <div className="g__text--sm tm__timeline-sub">
                       Creado: {task.created} · Modificado: {task.updated}
                     </div>

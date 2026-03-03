@@ -1,0 +1,7 @@
+.cs__bg-previw-text {
+    background-color: rgb(var(--background-app));
+}
+
+.cs__secondary-text {
+    color: rgb(var(--grey))
+}

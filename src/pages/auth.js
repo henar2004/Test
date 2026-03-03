@@ -1,61 +1,72 @@
-// ==================
-// Pagina: login-page.js
-// Pagina de login para usuarios registrados, con formulario de email y contraseña, y enlaces a recuperar contraseña y registro.
-// ==================
+/* =========================================
+   Archivo: login-page.js
+   Tipo: Page
+   Descripción: Página de autenticación que renderiza el formulario de acceso y enlaces auxiliares de recuperación y registro
+   ========================================= */
 
+/* ====== IMPORTS ======
+   Importaciones de librerías, hooks, componentes y recursos */
 import { Link } from "react-router-dom";
 
+/* ====== RENDER / JSX ======
+   Estructura principal del componente, return con JSX */
 export default function Login() {
   return (
     <main className="g__page-bg d-flex justify-content-center align-items-center">
       <div className="container d-flex flex-column gap-3">
         <section className="g__card login-box p-4 rounded">
-          {/* Nombre */}
-          <div className="mb-3">
-            <label className="g__text--md mb-1">Nombre</label>
-            <input
-              type="text"
-              className="form-control login-input"
-              placeholder="Tu nombre"
-            />
-          </div>
+          {/* Formulario de autenticación */}
+          <form>
+            {/* Campo de correo electrónico */}
+            <div className="mb-3">
+              <label htmlFor="email" className="g__text--md mb-1">
+                Correo
+              </label>
+              <input
+                id="email"
+                type="email"
+                className="form-control login-input"
+                placeholder="ejemplo@gmail.com"
+                required
+              />
+            </div>
 
-          {/* Email */}
-          <div className="mb-3">
-            <label className="g__text--md mb-1">Correo</label>
-            <input
-              type="email"
-              className="form-control login-input"
-              placeholder="ejemplo@gmail.com"
-            />
-          </div>
+            {/* Campo de contraseña */}
+            <div className="mb-3">
+              <label htmlFor="password" className="g__text--md mb-1">
+                Contraseña
+              </label>
+              <input
+                id="password"
+                type="password"
+                className="form-control login-input"
+                placeholder="••••••••"
+                required
+              />
+            </div>
 
-          {/* Contraseña */}
-          <div className="mb-3">
-            <label className="g__text--md mb-1">Contraseña</label>
-            <input
-              type="password"
-              className="form-control login-input"
-              placeholder="••••••••"
-            />
-          </div>
+            {/* Enlace a flujo de recuperación de credenciales */}
+            <div className="d-flex justify-content-end align-items-center">
+              <Link to="/recuperar" className="g__text--sm fw-semibold">
+                ¿Has olvidado la contraseña?
+              </Link>
+            </div>
 
-          {/* Recuperar contraseña */}
-          <div className="d-flex justify-content-end align-items-center">
-            <Link to="/recuperar" className="g__text--sm fw-semibold">
-              Has olvidado la contraseña?
-            </Link>
-          </div>
-
-          {/* Enviar mail */}
-          <button className="g__btn fw-semibold g__text--md">Entrar</button>
+            {/* Botón de envío */}
+            <button
+              type="submit"
+              className="g__btn g__btn--hover fw-semibold g__text--md w-100"
+            >
+              Entrar
+            </button>
+          </form>
         </section>
 
-        {/* Crear cuenta */}
+        {/* Sección secundaria para redirigir a registro */}
         <div className="text-center g__text--sm">
           <p className="mb-1">
             ¿No tienes cuenta?
-            <Link to="/registro" className="fw-semibold">
+            <Link to="/registro" className="fw-semibold ms-1">
               Crear una ahora
             </Link>
           </p>

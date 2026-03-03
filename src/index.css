@@ -1,18 +1,24 @@
-/* =========================
-   Estilos: index.css
-   Estilos basicos para index.html
-   ========================= */
+/* =========================================
+   Archivo: index.css
+   Tipo: Hoja de estilos
+   Descripción: Reglas globales que afectan a toda la aplicación
+   ========================================= */
 
+/* ====== GENERIC ======
+   Establece reglas globales y normalización base */
+
+/* Elimina márgenes por defecto y define tipografía base */
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  font-family:
+    -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu",
+    "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
+/* Estilo de fuente para bloques de código */
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+  font-family:
+    source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
 }

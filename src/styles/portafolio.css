@@ -1,14 +1,11 @@
-/* =========================
-   Estilos: portafolio.css
-   Estilos específicos para la página de portafolio
-   ========================= */
+/* =========================================
+   Archivo: portafolio.css
+   Tipo: Hoja de estilos
+   Descripción: Reglas específicas para la página de portafolio personal
+   ========================================= */
 
-/* ===== SECCIÓN HERO ===== */
-/* Contenedor principal del hero con foto y datos personales */
-.p__hero {
-  display: flex;
-  align-items: center;
-}
+/* ====== ELEMENTS ======
+   Define estilos base aplicados a etiquetas HTML puras */
 
 /* Foto redonda del hero con borde sutil */
 .p__hero-photo {
@@ -24,35 +21,7 @@
   margin: 0.15rem 0 0.6rem;
 }
 
-/* ===== TIMELINE (EXPERIENCIA LABORAL) ===== */
-/* Contenedor vertical de los items de la línea temporal */
-.p__timeline {
-  display: flex;
-  flex-direction: column;
-}
-
-/* Cada elemento de la línea temporal con icono y contenido */
-.p__timeline-item {
-  display: flex;
-  align-items: flex-start;
-}
-
-/* Punto circular de la línea temporal en color verde */
-.p__timeline-dot {
-  width: 12px;
-  height: 12px;
-  border-radius: 50%;
-  background: rgb(0, 179, 126);
-  margin-top: 6px;
-}
-
-/* Texto secundario con fecha o información adicional */
-.p__timeline-sub {
-  color: rgb(var(--grey));
-}
-
-/* ===== SKILLS (HABILIDADES) ===== */
-/* Punto indicador de skill en color verde */
+/* Punto indicador de skill */
 .p__skill-dot {
   display: inline-block;
   width: 10px;
@@ -61,38 +30,54 @@
   border-radius: 50%;
 }
 
-/* ===== BOTONES DE PROYECTOS ===== */
-/* Botón de proyecto con icono, borde sutil y transición suave */
-.p__btn {
-  display: inline-flex;
-  align-items: center;
-  border: 1px solid rgba(var(--grey), 0.2);
-  padding: 0.35rem 0.7rem;
-  border-radius: 6px;
-  color: rgb(var(--white));
-  transition: all 0.3s ease;
-}
-
-/* Efecto hover: fondo blanco y texto oscuro (solo si no está deshabilitado) */
-.p__btn:not(.p__disabled-btn):hover {
-  background-color: rgb(var(--white));
-  color: rgb(var(--card)) !important;
-}
-
-/* Efecto hover en icono: cambia a negro para mejor contraste */
-.p__btn:not(.p__disabled-btn):hover img {
-  filter: brightness(0) saturate(100%);
-}
-
-/* Transición suave del icono dentro del botón */
-.p__btn img {
-  transition: filter 0.3s ease;
-}
-
-/* ===== ESTADOS ESPECIALES ===== */
-/* Botón deshabilitado (proyecto no disponible) con fondo rojo */
-.p__disabled-btn {
+/* Botón deshabilitado */
+.p__btn--disabled {
   background-color: rgb(var(--red));
   color: rgb(var(--white));
   cursor: not-allowed;
+}
+
+/* Icono dentro del botón con transición */
+.p__btn-img--hover img {
+  transition: filter 0.3s ease;
+}
+
+/* Hover de icono dentro del botón */
+.p__btn-img--hover:hover img {
+  filter: brightness(0) saturate(100%);
+}
+
+/* ====== COMPONENTS ======
+   Define componentes de interfaz independientes */
+
+/* Contenedor principal del hero */
+.p__hero {
+  display: flex;
+  align-items: center;
+}
+
+/* Timeline de experiencia laboral */
+.p__timeline {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Cada item dentro del timeline */
+.p__timeline-item {
+  display: flex;
+  align-items: flex-start;
+}
+
+/* Punto circular dentro del timeline */
+.p__timeline-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: rgb(0, 179, 126);
+  margin-top: 6px;
+}
+
+/* Texto secundario dentro del timeline */
+.p__timeline-sub {
+  color: rgb(var(--grey));
 }
