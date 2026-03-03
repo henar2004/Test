@@ -184,12 +184,12 @@ function wordPointsToHtmlWithPoints(wordPoints) {
       if (w.score > 0) {
         const multLabel =
           w.mult && w.mult !== 1 ? ` • ${formatMultiplierPercent(w.mult)}` : "";
-        return `<span class="text-success">${t} <small class="text-muted">(+${w.score}${multLabel})</small></span>`;
+        return `<span class="text-success">${t} <small>(+${w.score}${multLabel})</small></span>`;
       }
       if (w.score < 0) {
         const multLabel =
           w.mult && w.mult !== 1 ? ` • ${formatMultiplierPercent(w.mult)}` : "";
-        return `<span class="text-danger">${t} <small class="text-muted">(${w.score}${multLabel})</small></span>`;
+        return `<span class="text-danger">${t} <small>(${w.score}${multLabel})</small></span>`;
       }
       return t;
     })
